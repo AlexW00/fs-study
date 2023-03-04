@@ -1,13 +1,15 @@
 import "./style.css";
-import { io } from "socket.io-client";
+import { onSocketEvent, SocketEvent } from "./Socket";
+import { html, reactive } from "@arrow-js/core";
 
-const socket = io();
-
-// client-side
-socket.on("connect", () => {
-	console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+const state = reactive({
+	isConnected: false,
 });
 
-socket.on("disconnect", () => {
-	console.log(socket.id); // undefined
+onSocketEvent(SocketEvent.Connect, () => {
+	state.isConnected = true;
+});
+
+onSocketEvent(SocketEvent.Disconnect, () => {
+	state.isConnected = false;
 });
