@@ -1,14 +1,14 @@
-const express = require("express");
+import express from "express";
 const app = express();
-const http = require("http");
+import http from "http";
 const server = http.createServer(app);
-const path = require("path");
+import path from "path";
 
-const { Server } = require("socket.io");
+import { Server } from "socket.io";
 const io = new Server(server);
 
 // dist dir is located one level up from server dir
-const DIST_DIR = path.join(__dirname, "../dist");
+const DIST_DIR = path.join(__dirname, "../../dist");
 
 // serve all files in dist
 app.use(express.static(DIST_DIR));

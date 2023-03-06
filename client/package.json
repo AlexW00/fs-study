@@ -1,5 +1,5 @@
 {
-	"name": "client",
+	"name": "@fs/client",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -13,6 +13,7 @@
 	},
 	"dependencies": {
 		"@arrow-js/core": "^1.0.0-alpha.8",
+		"@fs/lib": "file:../lib",
 		"socket.io-client": "^4.6.1"
 	}
 }

@@ -1,6 +1,6 @@
 import "./style.css";
 import { onSocketEvent, SocketEvent } from "./Socket";
-import { html, reactive } from "@arrow-js/core";
+import { reactive } from "@arrow-js/core";
 
 const state = reactive({
 	isConnected: false,
