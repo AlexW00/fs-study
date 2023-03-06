@@ -1,6 +1,9 @@
 export enum SocketEvent {
 	Connect = "connect",
 	Disconnect = "disconnect",
+	SendAuth = "auth",
+	ReceiveAuth = "receiveAuth",
 	Test = "test",
-	GetRun = "getRun",
+	PostAnswer = "postAnswer",
+	ReceiveTaskProgressUpdate = "receiveTaskProgress",
 }
