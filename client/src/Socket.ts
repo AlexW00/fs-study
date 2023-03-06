@@ -1,9 +1,5 @@
+import { SocketEvent } from "fs-lib";
 import { io } from "socket.io-client";
-
-export enum SocketEvent {
-	Connect = "connect",
-	Disconnect = "disconnect",
-}
 
 export type SocketPayload = any;
 
@@ -16,4 +12,8 @@ export const onSocketEvent = (
 	handler: SocketEventHandler
 ) => {
 	socket.on(event, handler);
+};
+
+export const emitSocketEvent = (event: SocketEvent, payload: SocketPayload) => {
+	socket.emit(event, payload);
 };

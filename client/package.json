@@ -4,16 +4,17 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite build --watch",
+		"dev": "vite build --watch --emptyOutDir --force",
 		"build": "tsc && vite build"
 	},
 	"devDependencies": {
-		"typescript": "^4.9.3",
+		"@originjs/vite-plugin-commonjs": "^1.0.3",
 		"vite": "^4.1.0"
 	},
 	"dependencies": {
 		"@arrow-js/core": "^1.0.0-alpha.8",
-		"@fs/lib": "file:../lib",
-		"socket.io-client": "^4.6.1"
+		"fs-lib": "file:../lib",
+		"socket.io-client": "^4.6.1",
+		"typescript": "^4.9.3"
 	}
 }
