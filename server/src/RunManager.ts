@@ -1,4 +1,4 @@
-import { Run } from "fs-lib";
+import { Run } from "../../shared/Run";
 
 export class RunManager {
 	private readonly runs: Run[];

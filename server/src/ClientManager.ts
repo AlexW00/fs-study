@@ -1,7 +1,7 @@
 import { Server } from "socket.io";
 import http from "http";
-import { SocketEvent } from "fs-lib";
 import { ConnectionPool } from "./ConnectionPool";
+import { SocketEvent } from "../../shared/SocketEvent";
 
 export class ClientManager {
 	private readonly socket: Server;

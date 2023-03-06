@@ -1,5 +1,5 @@
-import { SocketEvent } from "fs-lib";
 import { io } from "socket.io-client";
+import { SocketEvent } from "../../shared/SocketEvent";
 
 export type SocketPayload = any;
 
