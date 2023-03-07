@@ -1,5 +1,6 @@
 import { Socket } from "socket.io";
 import { Platform } from "../../shared/Platform";
+import { SocketEvent } from "../../shared/SocketEvent";
 
 export interface Connection {
 	mobile: Socket | undefined;
@@ -38,8 +39,28 @@ export class ConnectionPool {
 		if (connection) {
 			if (platform === Platform.mobile) {
 				connection.mobile = socket;
+				if (connection.desktop) {
+					connection.desktop.emit(SocketEvent.Paired);
+					connection.mobile.emit(SocketEvent.Paired);
+				}
 			} else {
 				connection.desktop = socket;
+				if (connection.mobile) {
+					connection.desktop.emit(SocketEvent.Paired);
+					connection.mobile.emit(SocketEvent.Paired);
+				}
+			}
+		}
+	}
+
+	public removeSocket(socket: Socket) {
+		for (const [runId, connection] of this.connections) {
+			if (connection.mobile?.id === socket.id) {
+				connection.mobile = undefined;
+				connection.desktop?.emit(SocketEvent.Unpaired);
+			} else if (connection.desktop?.id === socket.id) {
+				connection.desktop = undefined;
+				connection.mobile?.emit(SocketEvent.Unpaired);
 			}
 		}
 	}

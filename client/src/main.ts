@@ -4,18 +4,21 @@ import { html, reactive } from "@arrow-js/core";
 import { SocketEvent } from "../../shared/SocketEvent";
 import { initialState, State } from "./classes/State";
 import { TaskAnswer } from "../../shared/TaskAnswer";
-import { Platform } from "../../shared/Platform";
 import { CurrentTaskInfo } from "../../shared/CurrentTaskInfo";
 
 const state = reactive<State>(initialState);
 
-console.log(SocketEvent);
+// popup input
+const pairingCode = "00007";
+const platform = localStorage.getItem("platform") || "desktop";
+localStorage.setItem("platform", platform);
+
+console.log(state.isPaired);
 onSocketEvent(SocketEvent.Connect, () => {
-	state.isConnected = true;
 	console.log("connected");
 	emitSocketEvent(SocketEvent.SendAuth, {
-		platform: Platform.desktop,
-		runId: null,
+		platform: platform,
+		runId: pairingCode,
 	});
 });
 
@@ -34,8 +37,18 @@ onSocketEvent(
 	}
 );
 
+onSocketEvent(SocketEvent.Paired, () => {
+	console.log("paired");
+	state.isPaired = true;
+});
+
+onSocketEvent(SocketEvent.Unpaired, () => {
+	console.log("unpaired");
+	state.isPaired = false;
+});
+
 onSocketEvent(SocketEvent.Disconnect, () => {
-	state.isConnected = false;
+	state.isPaired = false;
 });
 
 const app = document.getElementById("app")!;
@@ -59,6 +72,8 @@ const runTemplate = html`
 		<h1>Run</h1>
 		<p>Run ID: ${() => state.run?.id}</p>
 		<p>Current: ${() => state.run?.current.taskIndex}</p>
+		<p>Paired: ${() => state.isPaired.toString()}</p>
+		<p>Platform: ${() => platform}</p>
 		<button @click="${() => onClick()}">Test</button>
 	</div>
 `;

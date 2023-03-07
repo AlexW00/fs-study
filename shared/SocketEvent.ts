@@ -6,4 +6,6 @@ export enum SocketEvent {
 	Test = "test",
 	PostAnswer = "postAnswer",
 	ReceiveTaskProgressUpdate = "receiveTaskProgress",
+	Unpaired = "unpaired",
+	Paired = "paired",
 }

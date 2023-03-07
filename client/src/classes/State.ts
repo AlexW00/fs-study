@@ -3,11 +3,11 @@ import { TaskProgress } from "../../../shared/TaskProgress";
 
 export interface State {
 	run: Run;
-	isConnected: boolean;
+	isPaired: boolean;
 }
 
 export const initialState: State = {
-	isConnected: false,
+	isPaired: false,
 	run: {
 		id: "",
 		tasks: [],

@@ -32,8 +32,9 @@ export class ClientManager {
 		socket.on(eventType, (payload: any) => cb(socket, payload));
 	}
 
-	private onDisconnect = () => {
+	private onDisconnect = (socket: Socket) => {
 		console.log("user disconnected");
+		this.connectionPool.removeSocket(socket);
 	};
 
 	private onSendAuth = (socket: Socket, auth: any) => {
