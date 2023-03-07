@@ -65,4 +65,13 @@ export class ConnectionPool {
 			}
 		}
 	}
+
+	public removeConnection(runId: string) {
+		const connection = this.connections.get(runId);
+		if (connection) {
+			connection.mobile?.emit(SocketEvent.DeleteSession);
+			connection.desktop?.emit(SocketEvent.DeleteSession);
+			this.connections.delete(runId);
+		}
+	}
 }

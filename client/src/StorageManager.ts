@@ -14,6 +14,10 @@ export class StorageManager {
 	public setDidGiveConsent(didGiveConsent: boolean): void {
 		localStorage.setItem("didGiveConsent", didGiveConsent.toString());
 	}
+
+	public reset(): void {
+		localStorage.clear();
+	}
 }
 
 export default new StorageManager();

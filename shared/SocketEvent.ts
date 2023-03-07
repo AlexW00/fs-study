@@ -5,6 +5,8 @@ export enum SocketEvent {
 	SendCreateAuth = "createAuth",
 	ReceiveAuth = "receiveAuth",
 	ReceiveFailedAuth = "receiveFailedAuth",
+	DeleteSession = "deleteSession",
+	DeletedSession = "deletedSession",
 	Test = "test",
 	PostAnswer = "postAnswer",
 	ReceiveTaskProgressUpdate = "receiveTaskProgress",

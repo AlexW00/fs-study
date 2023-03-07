@@ -22,6 +22,7 @@ export class ClientManager {
 			this.listen(socket, SocketEvent.SendCreateAuth, this.onCreateAuth);
 			this.listen(socket, SocketEvent.Test, this.onTest);
 			this.listen(socket, SocketEvent.PostAnswer, this.onPostAnswer);
+			this.listen(socket, SocketEvent.DeleteSession, this.onDeleteSession);
 		});
 	}
 
@@ -88,6 +89,13 @@ export class ClientManager {
 					);
 				}
 			}
+		}
+	};
+
+	private onDeleteSession = (socket: Socket) => {
+		const runId = this.connectionPool.getRunId(socket.id);
+		if (runId) {
+			this.connectionPool.removeConnection(runId);
 		}
 	};
 
