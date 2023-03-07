@@ -1,24 +1,29 @@
 import "./style.css";
 import { emitSocketEvent, onSocketEvent } from "./Socket";
-import { html, reactive } from "@arrow-js/core";
 import { SocketEvent } from "../../shared/SocketEvent";
-import { initialState, State } from "./classes/State";
-import { TaskAnswer } from "../../shared/TaskAnswer";
+import state from "./classes/State";
 import { CurrentTaskInfo } from "../../shared/CurrentTaskInfo";
+import { getPlatform } from "./util";
+import StorageManager from "./StorageManager";
+import { $router } from "./views/router";
 
-const state = reactive<State>(initialState);
+state.pairingCode = StorageManager.getPairingCode() ?? "";
+if (state.pairingCode === "") {
+	// show input popup	and request pairing code
+	const code = prompt("Enter pairing code");
+	if (code) {
+		StorageManager.setPairingCode(code);
+		state.pairingCode = code;
+	}
+}
 
-// popup input
-const pairingCode = "00007";
-const platform = localStorage.getItem("platform") || "desktop";
-localStorage.setItem("platform", platform);
-
+const platform = getPlatform();
 console.log(state.isPaired);
 onSocketEvent(SocketEvent.Connect, () => {
 	console.log("connected");
 	emitSocketEvent(SocketEvent.SendAuth, {
 		platform: platform,
-		runId: pairingCode,
+		runId: state.pairingCode,
 	});
 });
 
@@ -50,32 +55,5 @@ onSocketEvent(SocketEvent.Unpaired, () => {
 onSocketEvent(SocketEvent.Disconnect, () => {
 	state.isPaired = false;
 });
-
 const app = document.getElementById("app")!;
-
-const onClick = () => {
-	console.log("click");
-	const i = state.run.current.taskIndex,
-		id = state.run.tasks[i].id;
-
-	const taskAnswer: TaskAnswer = {
-		taskId: id,
-		estimatedDuration: 100,
-	};
-
-	console.log(taskAnswer);
-	emitSocketEvent(SocketEvent.PostAnswer, taskAnswer);
-};
-
-const runTemplate = html`
-	<div>
-		<h1>Run</h1>
-		<p>Run ID: ${() => state.run?.id}</p>
-		<p>Current: ${() => state.run?.current.taskIndex}</p>
-		<p>Paired: ${() => state.isPaired.toString()}</p>
-		<p>Platform: ${() => platform}</p>
-		<button @click="${() => onClick()}">Test</button>
-	</div>
-`;
-
-runTemplate(app);
+$router(app);

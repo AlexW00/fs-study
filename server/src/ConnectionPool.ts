@@ -34,22 +34,22 @@ export class ConnectionPool {
 		return undefined;
 	}
 
+	private notifyPaired(connection: Connection) {
+		connection.mobile?.emit(SocketEvent.Paired);
+		connection.desktop?.emit(SocketEvent.Paired);
+	}
+
+	private notifyUnpaired(connection: Connection) {
+		connection.mobile?.emit(SocketEvent.Unpaired);
+		connection.desktop?.emit(SocketEvent.Unpaired);
+	}
+
 	public addSocket(runId: string, socket: Socket, platform: Platform) {
 		const connection = this.connections.get(runId);
 		if (connection) {
-			if (platform === Platform.mobile) {
-				connection.mobile = socket;
-				if (connection.desktop) {
-					connection.desktop.emit(SocketEvent.Paired);
-					connection.mobile.emit(SocketEvent.Paired);
-				}
-			} else {
-				connection.desktop = socket;
-				if (connection.mobile) {
-					connection.desktop.emit(SocketEvent.Paired);
-					connection.mobile.emit(SocketEvent.Paired);
-				}
-			}
+			if (platform === Platform.mobile) connection.mobile = socket;
+			else connection.desktop = socket;
+			this.notifyPaired(connection);
 		}
 	}
 
@@ -57,10 +57,10 @@ export class ConnectionPool {
 		for (const [runId, connection] of this.connections) {
 			if (connection.mobile?.id === socket.id) {
 				connection.mobile = undefined;
-				connection.desktop?.emit(SocketEvent.Unpaired);
+				this.notifyUnpaired(connection);
 			} else if (connection.desktop?.id === socket.id) {
 				connection.desktop = undefined;
-				connection.mobile?.emit(SocketEvent.Unpaired);
+				this.notifyUnpaired(connection);
 			}
 		}
 	}
