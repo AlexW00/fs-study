@@ -19,6 +19,7 @@ export class ClientManager {
 			console.log("a user connected");
 			this.listen(socket, SocketEvent.Disconnect, this.onDisconnect);
 			this.listen(socket, SocketEvent.SendAuth, this.onSendAuth);
+			this.listen(socket, SocketEvent.SendCreateAuth, this.onCreateAuth);
 			this.listen(socket, SocketEvent.Test, this.onTest);
 			this.listen(socket, SocketEvent.PostAnswer, this.onPostAnswer);
 		});
@@ -40,17 +41,31 @@ export class ClientManager {
 	private onSendAuth = (socket: Socket, auth: any) => {
 		console.log("auth", auth);
 		const platform = auth.platform,
-			run = this.runManager.getRun(auth.runId) ?? this.runManager.newRun();
-
-		if (this.connectionPool.hasConnection(run.id)) {
-			this.connectionPool.addSocket(run.id, socket, platform);
+			run = this.runManager.getRun(auth.runId);
+		if (run) {
+			if (this.connectionPool.hasConnection(run.id)) {
+				this.connectionPool.addSocket(run.id, socket, platform);
+			} else {
+				this.connectionPool.createNewConnection(run.id, {
+					mobile: platform === "mobile" ? socket : undefined,
+					desktop: platform === "desktop" ? socket : undefined,
+				});
+			}
+			socket.emit(SocketEvent.ReceiveAuth, { run });
 		} else {
-			const connection: Connection = {
-				mobile: platform === "mobile" ? socket : undefined,
-				desktop: platform === "desktop" ? socket : undefined,
-			};
-			this.connectionPool.createNewConnection(run.id, connection);
+			socket.emit(SocketEvent.ReceiveFailedAuth);
 		}
+	};
+
+	private onCreateAuth = (socket: Socket, auth: any) => {
+		const platform = auth.platform,
+			run = this.runManager.newRun();
+
+		const connection: Connection = {
+			mobile: platform === "mobile" ? socket : undefined,
+			desktop: platform === "desktop" ? socket : undefined,
+		};
+		this.connectionPool.createNewConnection(run.id, connection);
 
 		socket.emit(SocketEvent.ReceiveAuth, { run });
 	};

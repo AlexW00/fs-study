@@ -49,7 +49,8 @@ export class ConnectionPool {
 		if (connection) {
 			if (platform === Platform.mobile) connection.mobile = socket;
 			else connection.desktop = socket;
-			this.notifyPaired(connection);
+			if (connection.mobile && connection.desktop)
+				this.notifyPaired(connection);
 		}
 	}
 
