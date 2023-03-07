@@ -93,9 +93,13 @@ export class ClientManager {
 	};
 
 	private onDeleteSession = (socket: Socket) => {
+		// TODO: remove run as well
 		const runId = this.connectionPool.getRunId(socket.id);
 		if (runId) {
 			this.connectionPool.removeConnection(runId);
+		} else {
+			console.log("run not found");
+			socket.emit(SocketEvent.DeletedSession);
 		}
 	};
 

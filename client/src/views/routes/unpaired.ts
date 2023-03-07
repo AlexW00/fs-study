@@ -1,12 +1,10 @@
 import { html } from "@arrow-js/core";
 import { SocketEvent } from "../../../../shared/SocketEvent";
-import state, { initialState, setPairingCode } from "../../classes/State";
+import state, { initialState } from "../../classes/State";
 import { emitSocketEvent, onSocketEvent } from "../../Socket";
 import StorageManager from "../../StorageManager";
 
 const onLeaveSession = () => {
-	setPairingCode("");
-	state.isPaired = false;
 	emitSocketEvent(SocketEvent.DeleteSession, undefined);
 };
 

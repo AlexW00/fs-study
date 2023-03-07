@@ -19,6 +19,19 @@ const onClick = () => {
 	emitSocketEvent(SocketEvent.PostAnswer, taskAnswer);
 };
 
+const $taskDebug = html`
+	<div>
+		<h1>Task Debug</h1>
+		<p>
+			Task ID:
+			${() => JSON.stringify(state.run.tasks[state.run.current.taskIndex])}
+		</p>
+		<p>Task Index: ${() => state.run.current.taskIndex}</p>
+		<p>Task Count: ${() => state.run.tasks.length}</p>
+		<button @click="${() => onClick()}">Test</button>
+	</div>
+`;
+
 const platform = getPlatform();
 export const $study = html`
 	<div>
@@ -26,7 +39,10 @@ export const $study = html`
 		<p>Run ID: ${() => state.run?.id}</p>
 		<p>Current: ${() => state.run?.current.taskIndex}</p>
 		<p>Paired: ${() => state.isPaired.toString()}</p>
-		<p>Platform: ${() => platform}</p>
-		<button @click="${() => onClick()}">Test</button>
+		<p>Current Platform: ${() => platform}</p>
+		${() =>
+			state.run.tasks[state.run.current.taskIndex].platform == getPlatform()
+				? $taskDebug
+				: ""}
 	</div>
 `;
