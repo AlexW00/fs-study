@@ -1,0 +1,20 @@
+.likert-scale {
+	margin: 0.5rem;
+}
+
+.likert-scale-options {
+	display: flex;
+	flex-direction: row;
+	gap: 1.5rem;
+}
+
+.likert-scale-option {
+	display: flex;
+	flex-direction: column-reverse;
+	gap: 0.5rem;
+	width: 4rem;
+}
+
+.likert-scale-option > label {
+	text-align: center;
+}

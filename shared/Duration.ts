@@ -1,5 +1,5 @@
 export enum Duration {
-	short = 1,
-	medium = 2,
-	long = 3,
+	short = 1000,
+	medium = 2000,
+	long = 3000,
 }
