@@ -11,10 +11,10 @@ export class ClientManager {
 	private readonly connectionPool: ConnectionPool;
 	private readonly runManager: RunManager;
 
-	constructor(server: http.Server) {
+	constructor(server: http.Server, runManager: RunManager) {
 		this.socket = new Server(server);
+		this.runManager = runManager;
 		this.connectionPool = new ConnectionPool();
-		this.runManager = new RunManager();
 
 		this.socket.on(SocketEvent.Connect, (socket) => {
 			console.log("a user connected");
@@ -26,6 +26,10 @@ export class ClientManager {
 			this.listen(socket, SocketEvent.DeleteSession, this.onDeleteSession);
 			this.listen(socket, SocketEvent.SendGiveConsent, this.onGiveConsent);
 		});
+	}
+
+	public async init() {
+		await this.runManager.init();
 	}
 
 	private listen(

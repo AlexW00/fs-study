@@ -11,6 +11,7 @@ export enum SocketEvent {
 	ReceiveTaskProgressUpdate = "receiveTaskProgress",
 	SendGiveConsent = "giveConsent",
 	ReceiveGiveConsent = "receiveGiveConsent",
+	SendCompleteRun = "completeRun",
 	Unpaired = "unpaired",
 	Paired = "paired",
 	Test = "test",
