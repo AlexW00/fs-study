@@ -19,35 +19,35 @@ export interface LikertScale {
 // 7 point likert scale ranging from very short to very long
 export const ESTIMATED_DURATION_LIKERT_SCALE: LikertScale = {
 	id: "estimated-duration",
-	title: "How long did that loading time feel?",
+	title: "Wie lang empfanden Sie die Ladezeit der Webseite?",
 	options: [
 		{
 			value: 1,
-			label: "Very short",
+			label: "sofort",
 		},
 		{
 			value: 2,
-			label: "Short",
+			label: "sehr kurz",
 		},
 		{
 			value: 3,
-			label: "Medium",
+			label: "kurz",
 		},
 		{
 			value: 4,
-			label: "Long",
+			label: "mittel",
 		},
 		{
 			value: 5,
-			label: "Very long",
+			label: "lang",
 		},
 		{
 			value: 6,
-			label: "Extremely long",
+			label: "sehr lang",
 		},
 		{
 			value: 7,
-			label: "Unbearably long",
+			label: "unendlich lang",
 		},
 	],
 };

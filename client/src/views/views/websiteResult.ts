@@ -28,8 +28,6 @@ export const websiteResultView = (
 
 	return html`
 		<div class="website-result">
-			<h1>Website Result</h1>
-			<p>Current answer: ${() => JSON.stringify(checkedOption.value)}</p>
 			${likertScaleView(ESTIMATED_DURATION_LIKERT_SCALE, (option) => {
 				Object.assign(checkedOption, option);
 			})}
