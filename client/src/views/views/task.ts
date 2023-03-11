@@ -15,8 +15,6 @@ export const taskView = (
 	});
 	return html`
 		<div class="task">
-			<h1>Task</h1>
-			<p>Task ID: ${() => task.id}</p>
 			${() => {
 				if (!loadStates.isReady) {
 					return preTaskView(() => {

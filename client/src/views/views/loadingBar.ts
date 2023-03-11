@@ -6,7 +6,7 @@ export const loadingBarView = (
 	onLoadingComplete: () => void
 ) => html`
 	<div class="loading-bar">
-		<div class="loading-bar__progress">LOADING...</div>
+		<div class="loading-bar-progress">LOADING...</div>
 		${() => {
 			setTimeout(() => {
 				onLoadingComplete();

@@ -8,8 +8,7 @@ import { $study } from "./routes/study";
 import { $unpaired } from "./routes/unpaired";
 
 export const $router = html`
-	<div>
-		<h1>Router</h1>
+	<div id="router">
 		${() => {
 			const route = getAppRoute(state);
 			if (route === AppRoute.Setup) return $setup;

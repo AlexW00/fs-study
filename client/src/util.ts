@@ -2,8 +2,13 @@ import { Platform } from "../../shared/Platform";
 import { Task } from "../../shared/Task";
 
 export const getPlatform = (): Platform => {
-	if (window.innerWidth < 600) return Platform.mobile;
+	// get platform by screen width
+	if (window.innerWidth < 768) return Platform.mobile;
 	return Platform.desktop;
+
+	// get platform by user agent
+	// if (navigator.userAgent.includes("Mobile")) return Platform.mobile;
+	// return Platform.desktop;
 };
 
 export const getOtherPlatform = (): Platform => {
