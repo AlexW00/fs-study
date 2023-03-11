@@ -74,4 +74,13 @@ export class ConnectionPool {
 			this.connections.delete(runId);
 		}
 	}
+
+	public getPlatform(socketId: string, runId: string): Platform {
+		const connection = this.connections.get(runId);
+		if (connection) {
+			if (connection.mobile?.id === socketId) return Platform.mobile;
+			else if (connection.desktop?.id === socketId) return Platform.desktop;
+		}
+		return Platform.desktop;
+	}
 }

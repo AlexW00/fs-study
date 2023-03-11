@@ -4,6 +4,7 @@ import { Connection, ConnectionPool } from "./ConnectionPool";
 import { SocketEvent } from "../../shared/SocketEvent";
 import { RunManager } from "./RunManager";
 import { TaskAnswer } from "../../shared/TaskAnswer";
+import { Platform } from "../../shared/Platform";
 
 export class ClientManager {
 	private readonly socket: Server;
@@ -23,6 +24,7 @@ export class ClientManager {
 			this.listen(socket, SocketEvent.Test, this.onTest);
 			this.listen(socket, SocketEvent.PostAnswer, this.onPostAnswer);
 			this.listen(socket, SocketEvent.DeleteSession, this.onDeleteSession);
+			this.listen(socket, SocketEvent.SendGiveConsent, this.onGiveConsent);
 		});
 	}
 
@@ -100,6 +102,19 @@ export class ClientManager {
 		} else {
 			console.log("run not found");
 			socket.emit(SocketEvent.DeletedSession);
+		}
+	};
+
+	private onGiveConsent = (socket: Socket) => {
+		const runId = this.connectionPool.getRunId(socket.id);
+		if (runId) {
+			const connection = this.connectionPool.getConnection(runId),
+				senderPlatform = this.connectionPool.getPlatform(socket.id, runId);
+			if (connection) {
+				if (senderPlatform === Platform.mobile)
+					connection.desktop?.emit(SocketEvent.ReceiveGiveConsent);
+				else connection.mobile?.emit(SocketEvent.ReceiveGiveConsent);
+			}
 		}
 	};
 

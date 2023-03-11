@@ -7,9 +7,11 @@ export enum SocketEvent {
 	ReceiveFailedAuth = "receiveFailedAuth",
 	DeleteSession = "deleteSession",
 	DeletedSession = "deletedSession",
-	Test = "test",
 	PostAnswer = "postAnswer",
 	ReceiveTaskProgressUpdate = "receiveTaskProgress",
+	SendGiveConsent = "giveConsent",
+	ReceiveGiveConsent = "receiveGiveConsent",
 	Unpaired = "unpaired",
 	Paired = "paired",
+	Test = "test",
 }

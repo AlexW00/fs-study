@@ -1,14 +1,22 @@
 import { html } from "@arrow-js/core";
+import { SocketEvent } from "../../../../shared/SocketEvent";
 import { setDidGiveConsent } from "../../classes/State";
+import { emitSocketEvent, onSocketEvent } from "../../Socket";
 
-// call this when the user clicks the consent button
 const giveConsent = () => {
 	setDidGiveConsent(true);
 };
 
+const onClickConsent = () => {
+	giveConsent();
+	emitSocketEvent(SocketEvent.SendGiveConsent, undefined);
+};
+
+onSocketEvent(SocketEvent.ReceiveGiveConsent, giveConsent);
+
 export const $preStudy = html`
 	<div>
 		<h1>Pre Study</h1>
-		<button @click="${giveConsent}">Consent</button>
+		<button @click="${onClickConsent}">Consent</button>
 	</div>
 `;
