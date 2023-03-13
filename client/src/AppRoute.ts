@@ -10,7 +10,13 @@ export enum AppRoute {
 }
 
 export const getAppRoute = (state: State): AppRoute => {
-	console.log(state.didGiveConsent, state.pairingCode, state.isPaired);
+	console.log(
+		state.didGiveConsent,
+		state.pairingCode,
+		state.isPaired,
+		state.run.tasks.length,
+		state.run.current.taskProgress
+	);
 	if (
 		(!state.didGiveConsent && state.pairingCode === "") ||
 		state.run.tasks.length === 0
