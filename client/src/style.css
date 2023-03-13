@@ -131,7 +131,7 @@ a:visited {
 .loading-bar {
 	margin: 0;
 	padding: 0;
-	animation-duration: 2.5s;
+	animation-duration: 2.7132s;
 	animation-fill-mode: forwards;
 	animation-iteration-count: infinite;
 	animation-name: movementLoader;
