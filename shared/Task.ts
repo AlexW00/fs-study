@@ -40,11 +40,34 @@ export const TASKS: Task[] = [
 	},
 ];
 
+const LATIN_SQUARE_TASK_IDs = [
+	[0, 2, 6, 4, 5, 3],
+	[2, 4, 0, 3, 6, 5],
+	[4, 3, 2, 5, 0, 6],
+	[3, 5, 4, 6, 2, 0],
+	[5, 6, 3, 0, 4, 2],
+	[6, 0, 5, 2, 3, 4],
+];
+
+const getRow = (index: number): number => {
+	return index % LATIN_SQUARE_TASK_IDs.length;
+};
+
 export function getTaskById(id: string): Task | undefined {
 	return TASKS.find((task) => task.id === id);
 }
 
 export function getLatinSquaredTasks(index: number): Task[] {
 	// TODO: Latin square here
+	const TASKS: Task[] = [];
+
+	for (let i = getRow(index); i < LATIN_SQUARE_TASK_IDs.length; i++) {
+		const taskIds = LATIN_SQUARE_TASK_IDs[i];
+		taskIds.forEach((taskId) => {
+			const task = getTaskById(taskId.toString());
+			if (task) TASKS.push(task);
+		});
+	}
+
 	return TASKS;
 }
