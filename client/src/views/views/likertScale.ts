@@ -7,6 +7,7 @@ export const likertScaleView = (
 	likertScale: LikertScale,
 	onAnswer: (option: LikertScaleOption) => void
 ) => html`
+<img src="https://technarmis.com/wp-content/uploads/2020/12/screen-0-1.jpg" class="bg-img"/>
 	<div class="likert-scale">
 		<h1>${likertScale.title}</h1>
 		<div class="likert-scale-options">
