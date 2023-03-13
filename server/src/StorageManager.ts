@@ -104,7 +104,7 @@ export class StorageManager {
 			return;
 		}
 
-		const runPath = this.getRunFilepath(runId, false),
+		const runPath = this.getRunFilepath(runId, true),
 			runFile = fs.readFileSync(runPath),
 			fileBlob = new Blob([runFile], { type: "application/json" }),
 			payload_json = { content: "Run completed: " + runId },
