@@ -9,7 +9,7 @@ const DESKTOP_IMAGES: Array<string> = [];
 const MOBILE_IMAGES: Array<string> = [];
 
 export async function importImages() {
-	const images = await import.meta.glob("./*/*.png");
+	const images = await import.meta.glob("./*/*.jpg");
 	for (const path in images) {
 		// @ts-ignore
 		const image = (await images[path]()).default as string;
