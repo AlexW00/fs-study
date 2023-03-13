@@ -4,10 +4,16 @@ body {
 }
 
 .bg-img {
+	position: fixed;
+	top: 0;
 	width: 100%;
-	height: auto;
 	filter: blur(4px);
 	z-index: -1;
+}
+
+.website-result {
+	height: 100vh;
+	overflow: hidden;
 }
 
 .likert-scale-options {
@@ -24,12 +30,12 @@ body {
 	align-items: center;
 }
 
-.likert-scale-option > * {
+.likert-scale-option>* {
 	align-self: center;
 	justify-self: center;
 }
 
-.likert-scale-option > label {
+.likert-scale-option>label {
 	text-align: center;
 	max-height: 1em;
 	min-height: 1em;
@@ -131,36 +137,17 @@ a:visited {
 	animation-name: movementLoader;
 	animation-timing-function: linear;
 	background: rgb(2, 62, 138);
-	background: linear-gradient(
-		90deg,
-		rgba(2, 62, 138, 1) 0vw,
-		rgba(2, 62, 138, 1) 35vw,
-		rgba(144, 224, 239, 1) 50vw,
-		rgba(2, 62, 138, 1) 65vw,
-		rgba(2, 62, 138, 1) 100vw
-	);
+	background: linear-gradient(90deg,
+			rgba(2, 62, 138, 1) 0vw,
+			rgba(2, 62, 138, 1) 35vw,
+			rgba(144, 224, 239, 1) 50vw,
+			rgba(2, 62, 138, 1) 65vw,
+			rgba(2, 62, 138, 1) 100vw);
 }
 
 .loading-bar-progress {
 	visibility: hidden;
 	height: 1vh;
-}
-
-.likert-scale {
-	max-width: fit-content;
-}
-
-@media only screen and (max-device-width: 500px) and (orientation: portrait) {
-	input[type="radio"] {
-	}
-
-	.likert-scale-option > * {
-		font-size: smaller;
-	}
-
-	.likert-scale {
-		max-width: 75%;
-	}
 }
 
 #likert-scale-container {
@@ -175,7 +162,27 @@ a:visited {
 	margin-top: 4vh;
 	margin-bottom: 4vh;
 
-	width: 80%;
+	width: fit-content;
 	position: absolute;
 	top: 0;
+}
+
+.likert-scale {
+	max-width: fit-content;
+}
+
+@media only screen and (max-device-width: 500px) and (orientation: portrait) {
+	input[type="radio"] {}
+
+	.likert-scale-option>* {
+		font-size: smaller;
+	}
+
+	.likert-scale {
+		max-width: 75%;
+	}
+
+	#likert-scale-container {
+		max-width: 75%;
+	}
 }
