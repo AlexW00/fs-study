@@ -1,19 +1,42 @@
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import { SocketEvent } from "../../shared/SocketEvent";
 
 export type SocketPayload = any;
 
 export type SocketEventHandler = (payload: SocketPayload) => void;
 
-const socket = io();
+export class SocketManager {
+	private static instance: SocketManager;
+	private socket: Socket;
 
-export const onSocketEvent = (
-	event: SocketEvent,
-	handler: SocketEventHandler
-) => {
-	socket.on(event, handler);
-};
+	private static isInitialized = false;
 
-export const emitSocketEvent = (event: SocketEvent, payload: SocketPayload) => {
-	socket.emit(event, payload);
-};
+	private constructor() {
+		this.socket = io();
+	}
+
+	public static async init() {
+		return new Promise<void>((resolve) => {
+			SocketManager.instance = new SocketManager();
+			SocketManager.instance.socket.on(SocketEvent.Connect, () => {
+				SocketManager.isInitialized = true;
+				resolve();
+			});
+		});
+	}
+
+	public static getInstance(): SocketManager {
+		if (!SocketManager.isInitialized) {
+			throw new Error("SocketManager not initialized, call init() first");
+		}
+		return SocketManager.instance;
+	}
+
+	public on(event: SocketEvent, handler: SocketEventHandler) {
+		this.socket.on(event, handler);
+	}
+
+	public emit(event: SocketEvent, payload: SocketPayload) {
+		this.socket.emit(event, payload);
+	}
+}

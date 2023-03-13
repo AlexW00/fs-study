@@ -1,7 +1,6 @@
 import { html, reactive } from "@arrow-js/core";
 import { SocketEvent } from "../../../../shared/SocketEvent";
-import state from "../../classes/State";
-import { emitSocketEvent, onSocketEvent } from "../../Socket";
+import { SocketManager } from "../../Socket";
 import { getPlatform } from "../../util";
 
 let pairCode = reactive({
@@ -26,13 +25,13 @@ const isValidPairCode = (code: string) => {
 };
 
 const createNewSession = () => {
-	emitSocketEvent(SocketEvent.SendCreateAuth, {
+	SocketManager.getInstance().emit(SocketEvent.SendCreateAuth, {
 		platform: getPlatform(),
 	});
 };
 
 const joinSession = (code: string) => {
-	emitSocketEvent(SocketEvent.SendAuth, {
+	SocketManager.getInstance().emit(SocketEvent.SendAuth, {
 		platform: getPlatform(),
 		runId: code,
 	});
@@ -53,11 +52,6 @@ const onClickPair = (doValidate: boolean) => {
 const togglePairingCodeCategory = () => {
 	hasPairingCode.value = !hasPairingCode.value;
 };
-
-onSocketEvent(SocketEvent.ReceiveFailedAuth, () => {
-	console.log("failed auth");
-	doShowError.isInvalidAuth = true;
-});
 
 const $noPairingCodeCategory = html`
 	<button @click="${() => onClickPair(false)}">Start</button>

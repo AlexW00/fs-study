@@ -1,17 +1,12 @@
 import { html } from "@arrow-js/core";
 import { SocketEvent } from "../../../../shared/SocketEvent";
 import state, { initialState } from "../../classes/State";
-import { emitSocketEvent, onSocketEvent } from "../../Socket";
+import { SocketManager } from "../../Socket";
 import StorageManager from "../../StorageManager";
 
 const onLeaveSession = () => {
-	emitSocketEvent(SocketEvent.DeleteSession, undefined);
+	SocketManager.getInstance().emit(SocketEvent.DeleteSession, undefined);
 };
-
-onSocketEvent(SocketEvent.DeletedSession, () => {
-	StorageManager.reset();
-	Object.assign(state, initialState());
-});
 
 export const $unpaired = html`
 	<div>
