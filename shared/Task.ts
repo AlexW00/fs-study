@@ -34,19 +34,19 @@ export const TASKS: Task[] = [
 		duration: Duration.medium,
 	},
 	{
-		id: "3",
+		id: "5",
 		platform: Platform.mobile,
 		duration: Duration.long,
 	},
 ];
 
 const LATIN_SQUARE_TASK_IDs = [
-	[0, 2, 6, 4, 5, 3],
-	[2, 4, 0, 3, 6, 5],
-	[4, 3, 2, 5, 0, 6],
-	[3, 5, 4, 6, 2, 0],
-	[5, 6, 3, 0, 4, 2],
-	[6, 0, 5, 2, 3, 4],
+	[0, 2, 5, 4, 5, 3],
+	[2, 4, 0, 3, 5, 5],
+	[4, 3, 2, 5, 0, 5],
+	[3, 5, 4, 5, 2, 0],
+	[5, 5, 3, 0, 4, 2],
+	[5, 0, 5, 2, 3, 4],
 ];
 
 const getRow = (index: number): number => {
