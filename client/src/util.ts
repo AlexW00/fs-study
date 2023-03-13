@@ -17,5 +17,6 @@ export const getOtherPlatform = (): Platform => {
 };
 
 export const doShowTask = (task: Task): boolean => {
+	console.log("task", task);
 	return getPlatform() === task.platform;
 };

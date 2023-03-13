@@ -3,24 +3,11 @@ body {
 	padding: 0;
 }
 
-.likert-scale {
-	/* margin: 0.5rem; */
-
-	background-color: white;
-	border-radius: 6px;
-	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-	/*https://getcssscan.com/css-box-shadow-examples*/
-	padding: 4vw;
-	padding-top: 0;
-	margin: 4vw;
-}
-
 .bg-img {
 	width: 100%;
 	height: auto;
 	filter: blur(4px);
 	z-index: -1;
-	position: fixed;
 }
 
 .likert-scale-options {
@@ -37,12 +24,12 @@ body {
 	align-items: center;
 }
 
-.likert-scale-option>* {
+.likert-scale-option > * {
 	align-self: center;
 	justify-self: center;
 }
 
-.likert-scale-option>label {
+.likert-scale-option > label {
 	text-align: center;
 	max-height: 1em;
 	min-height: 1em;
@@ -56,12 +43,12 @@ h1 {
 }
 
 p {
-	font-family: 'Times New Roman', Times, serif;
+	font-family: "Times New Roman", Times, serif;
 	padding: 0 4vh;
 }
 
 label {
-	font-family: 'Times New Roman', Times, serif;
+	font-family: "Times New Roman", Times, serif;
 	padding-bottom: 1.5vh;
 	width: fit-content;
 }
@@ -73,7 +60,6 @@ div {
 	align-items: center;
 	width: 100%;
 }
-
 
 button {
 	width: fit-content;
@@ -128,11 +114,11 @@ a:visited {
 /* https://blog.hubspot.com/website/css-loading-animation */
 @keyframes movementLoader {
 	0% {
-		background-position: -100vw 0
+		background-position: -100vw 0;
 	}
 
 	100% {
-		background-position: 100vw 0
+		background-position: 100vw 0;
 	}
 }
 
@@ -145,7 +131,14 @@ a:visited {
 	animation-name: movementLoader;
 	animation-timing-function: linear;
 	background: rgb(2, 62, 138);
-	background: linear-gradient(90deg, rgba(2, 62, 138, 1) 0vw, rgba(2, 62, 138, 1) 35vw, rgba(144, 224, 239, 1) 50vw, rgba(2, 62, 138, 1) 65vw, rgba(2, 62, 138, 1) 100vw);
+	background: linear-gradient(
+		90deg,
+		rgba(2, 62, 138, 1) 0vw,
+		rgba(2, 62, 138, 1) 35vw,
+		rgba(144, 224, 239, 1) 50vw,
+		rgba(2, 62, 138, 1) 65vw,
+		rgba(2, 62, 138, 1) 100vw
+	);
 }
 
 .loading-bar-progress {
@@ -157,14 +150,32 @@ a:visited {
 	max-width: fit-content;
 }
 
-@media only screen and (max-device-width : 500px) and (orientation : portrait) {
-	input[type="radio"] {}
+@media only screen and (max-device-width: 500px) and (orientation: portrait) {
+	input[type="radio"] {
+	}
 
-	.likert-scale-option>* {
+	.likert-scale-option > * {
 		font-size: smaller;
 	}
 
 	.likert-scale {
 		max-width: 75%;
 	}
+}
+
+#likert-scale-container {
+	/* margin: 0.5rem; */
+
+	background-color: white;
+	border-radius: 6px;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	/*https://getcssscan.com/css-box-shadow-examples*/
+	padding: 4vw;
+	padding-top: 0;
+	margin-top: 4vh;
+	margin-bottom: 4vh;
+
+	width: 80%;
+	position: absolute;
+	top: 0;
 }

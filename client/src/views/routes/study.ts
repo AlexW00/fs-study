@@ -10,6 +10,7 @@ export const $study = html`
 	<div>
 		${() => {
 			const t = state.run.tasks[state.run.current.taskIndex];
+			// console.log(state.run.current);
 			if (doShowTask(t))
 				return taskView(
 					state.run.tasks[state.run.current.taskIndex],

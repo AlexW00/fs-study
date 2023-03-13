@@ -5,6 +5,15 @@ import state, { setPairingCode } from "./classes/State";
 import { CurrentTaskInfo } from "../../shared/CurrentTaskInfo";
 import { getPlatform } from "./util";
 import { $router } from "./views/router";
+import { importImages, loadImages } from "./img/ImageManager";
+
+async function main() {
+	await importImages();
+	await loadImages();
+
+	const app = document.getElementById("app")!;
+	$router(app);
+}
 
 onSocketEvent(SocketEvent.Connect, () => {
 	if (state.pairingCode !== "") {
@@ -44,5 +53,5 @@ onSocketEvent(SocketEvent.Unpaired, () => {
 onSocketEvent(SocketEvent.Disconnect, () => {
 	state.isPaired = false;
 });
-const app = document.getElementById("app")!;
-$router(app);
+
+main();
