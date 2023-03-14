@@ -133,6 +133,6 @@ export const $preStudy = html`
         stimme dieser zu.</label>
 		
 		</div>
-		<button @click="${onClickConsent}">Consent</button>
+		<button @click="${onClickConsent}">Bestätigen</button>
 	</div>
 `;

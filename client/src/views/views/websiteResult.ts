@@ -49,7 +49,7 @@ export const websiteResultView = (
 					disabled="${() => !isValid()}"
 					@click="${() => onAnswer(getAnswer())}"
 				>
-					Submit
+				Bestätigen
 				</button>
 			</div>
 		</div>

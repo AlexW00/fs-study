@@ -3,7 +3,7 @@ import { getOtherPlatform } from "../../util";
 
 export const switchDeviceView = () => html`
 	<div class="switch-device">
-		<h1>Switch Device</h1>
-		<p>Please continue on your ${getOtherPlatform()} device.</p>
+		<h1>Gerätewechsel</h1>
+		<p>Bitte fahre auf dem ${getOtherPlatform()==="mobile"? "mobilen":"Desktop -"} Gerät fort.</p>
 	</div>
 `;

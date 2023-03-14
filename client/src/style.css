@@ -271,7 +271,7 @@ button.luck-button:hover {
 	}
 
 	.likert-scale {
-		max-width: 75%;
+		max-width: 100%;
 	}
 
 	#likert-scale-container {

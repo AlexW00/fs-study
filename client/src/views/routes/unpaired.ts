@@ -9,8 +9,8 @@ const onLeaveSession = () => {
 
 export const $unpaired = html`
 	<div>
-		<h1>Unpaired</h1>
+		<h1>Nicht Verbunden</h1>
 		<p>Pairing code: ${() => state.pairingCode}</p>
-		<a href="#" @click="${onLeaveSession}">Leave session</a>
+		<a href="#" @click="${onLeaveSession}">Verlasse Session</a>
 	</div>
 `;

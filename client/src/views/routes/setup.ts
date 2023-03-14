@@ -58,7 +58,7 @@ const $noPairingCodeCategory = html`
 	<div>
 		Or
 		<a href="#" @click="${() => togglePairingCodeCategory()}">
-			enter a pairing code
+			gib einen pairing code ein
 		</a>
 	</div>
 `;
@@ -76,9 +76,9 @@ const $pairingCodeCategory = html`
 	<button @click="${() => onClickPair(true)}">Pair</button>
 	${() => {
 		if (doShowError.isInvalidPairCode) {
-			return html`<p>Invalid pair code</p>`;
+			return html`<p>Falscher pair code</p>`;
 		} else if (doShowError.isInvalidAuth) {
-			return html`<p>Session does not exist!</p>`;
+			return html`<p>Session existiert nicht!</p>`;
 		} else {
 			return html``;
 		}
@@ -86,7 +86,7 @@ const $pairingCodeCategory = html`
 	<div>
 		Or
 		<a href="#" @click="${() => togglePairingCodeCategory()}">
-			start without a pairing code
+			starten Sie ohne einen pairing code
 		</a>
 	</div>
 `;
