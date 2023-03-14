@@ -1,6 +1,6 @@
 import { html, reactive } from "@arrow-js/core";
-import { Task } from "../../../../shared/Task";
 import { TaskAnswer } from "../../../../shared/TaskAnswer";
+import state from "../../classes/State";
 import {
 	showLoadingBar,
 	showWebsiteResultView,
@@ -8,23 +8,23 @@ import {
 import { preTaskView } from "./preTask";
 
 export const taskView = (
-	task: Task,
+	taskIndex: number,
 	onTaskComplete: (answer: TaskAnswer) => void
 ) => {
+	const task = state.run.tasks[taskIndex];
+	console.log("RENDER: taskView i:", taskIndex, "t:", task);
 	const onFinishLoadingBar = () => showWebsiteResultView();
-
-	const onFinishPreTask = () => {
-		showLoadingBar(task.duration, onFinishLoadingBar, {
-			taskId: task.id,
-			onFinished: onTaskComplete,
-		});
-	};
 
 	return html`
 		<div class="task">
 			<div id="pre-task-container">
 				${() => {
-					return preTaskView(onFinishPreTask);
+					return preTaskView(() =>
+						showLoadingBar(task.duration, onFinishLoadingBar, {
+							taskId: task.id,
+							onFinished: onTaskComplete,
+						})
+					);
 				}}
 			</div>
 

@@ -2,7 +2,7 @@ import "./style.css";
 import { SocketEvent } from "../../shared/SocketEvent";
 import state, { initialState, setPairingCode } from "./classes/State";
 import { CurrentTaskInfo } from "../../shared/CurrentTaskInfo";
-import { getPlatform } from "./util";
+import { getPairingCodeFromUrl, getPlatform } from "./util";
 import { $router } from "./views/router";
 import { importImages, loadImages } from "./img/ImageManager";
 import { SocketManager } from "./Socket";
@@ -17,6 +17,12 @@ async function main() {
 	console.log("socket init");
 
 	const socketManager = SocketManager.getInstance();
+
+	const pairingCode = getPairingCodeFromUrl();
+	if (pairingCode) {
+		console.log("pairing code from url", pairingCode);
+		setPairingCode(pairingCode);
+	}
 
 	if (state.pairingCode !== "") {
 		socketManager.emit(SocketEvent.SendAuth, {
@@ -36,8 +42,8 @@ async function main() {
 	socketManager.on(
 		SocketEvent.ReceiveTaskProgressUpdate,
 		(current: CurrentTaskInfo) => {
-			console.log(current);
-			state.run.current = current as any;
+			console.log("task progress update", current);
+			Object.assign(state.run.current, current);
 		}
 	);
 

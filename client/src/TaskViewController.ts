@@ -13,6 +13,7 @@ const $preTaskViewContainer = () =>
 	document.getElementById("pre-task-container")!;
 
 const $hideContainer = (container: HTMLElement) => {
+	console.log("hide", container.id);
 	container.classList.add("hidden");
 };
 
@@ -41,6 +42,7 @@ const setWebsiteResultView = (props: WebsiteResultViewProps) => {
 	const container = $websiteResultContainer();
 	websiteResultView(props.taskId, (answer) => {
 		$hideContainer(container);
+		$showContainer($preTaskViewContainer());
 		props.onFinished(answer);
 	})(container);
 };

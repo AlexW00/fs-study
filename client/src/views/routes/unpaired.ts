@@ -1,8 +1,7 @@
 import { html } from "@arrow-js/core";
 import { SocketEvent } from "../../../../shared/SocketEvent";
-import state, { initialState } from "../../classes/State";
+import state from "../../classes/State";
 import { SocketManager } from "../../Socket";
-import StorageManager from "../../StorageManager";
 
 const onLeaveSession = () => {
 	SocketManager.getInstance().emit(SocketEvent.DeleteSession, undefined);

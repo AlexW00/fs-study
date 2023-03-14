@@ -9,16 +9,16 @@ import { taskView } from "../views/task";
 export const $study = html`
 	<div>
 		${() => {
-			const t = state.run.tasks[state.run.current.taskIndex];
-			// console.log(state.run.current);
-			if (doShowTask(t))
-				return taskView(
-					state.run.tasks[state.run.current.taskIndex],
-					(answer) => {
+			const i = state.run.current.taskIndex,
+				t = state.run.tasks[i];
+
+			if (doShowTask(t)) {
+				console.log("show task");
+				return html`${() =>
+					taskView(i, (answer) => {
 						SocketManager.getInstance().emit(SocketEvent.PostAnswer, answer);
-					}
-				);
-			else return switchDeviceView();
+					})}`;
+			} else return switchDeviceView();
 		}}
 	</div>
 `;
