@@ -1,9 +1,11 @@
 import { html, reactive } from "@arrow-js/core";
 import { Task } from "../../../../shared/Task";
 import { TaskAnswer } from "../../../../shared/TaskAnswer";
-import { loadingBarView } from "./loadingBar";
+import {
+	showLoadingBar,
+	showWebsiteResultView,
+} from "../../TaskViewController";
 import { preTaskView } from "./preTask";
-import { websiteResultView } from "./websiteResult";
 
 export const taskView = (
 	task: Task,
@@ -19,17 +21,13 @@ export const taskView = (
 				if (!loadStates.isReady) {
 					return preTaskView(() => {
 						loadStates.isReady = true;
+						showLoadingBar(task.duration, () =>
+							showWebsiteResultView(task.id, onTaskComplete)
+						);
 					});
-				} else if (!loadStates.isLoadingBarFinished) {
-					return loadingBarView(task.duration, () => {
-						loadStates.isLoadingBarFinished = true;
-					});
-				} else {
-					return websiteResultView(task.id, (answer) => {
-						onTaskComplete(answer);
-					});
-				}
+				} else return "";
 			}}
+			<div id="task-container"></div>
 		</div>
 	`;
 };
