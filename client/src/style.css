@@ -30,12 +30,12 @@ body {
 	align-items: center;
 }
 
-.likert-scale-option>* {
+.likert-scale-option > * {
 	align-self: center;
 	justify-self: center;
 }
 
-.likert-scale-option>label {
+.likert-scale-option > label {
 	text-align: center;
 	max-height: 1em;
 	min-height: 1em;
@@ -137,12 +137,14 @@ a:visited {
 	animation-name: movementLoader;
 	animation-timing-function: linear;
 	background: rgb(2, 62, 138);
-	background: linear-gradient(90deg,
-			rgba(2, 62, 138, 1) 0vw,
-			rgba(2, 62, 138, 1) 35vw,
-			rgba(144, 224, 239, 1) 50vw,
-			rgba(2, 62, 138, 1) 65vw,
-			rgba(2, 62, 138, 1) 100vw);
+	background: linear-gradient(
+		90deg,
+		rgba(2, 62, 138, 1) 0vw,
+		rgba(2, 62, 138, 1) 35vw,
+		rgba(144, 224, 239, 1) 50vw,
+		rgba(2, 62, 138, 1) 65vw,
+		rgba(2, 62, 138, 1) 100vw
+	);
 }
 
 .loading-bar-progress {
@@ -172,9 +174,10 @@ a:visited {
 }
 
 @media only screen and (max-device-width: 500px) and (orientation: portrait) {
-	input[type="radio"] {}
+	input[type="radio"] {
+	}
 
-	.likert-scale-option>* {
+	.likert-scale-option > * {
 		font-size: smaller;
 	}
 
@@ -185,4 +188,8 @@ a:visited {
 	#likert-scale-container {
 		max-width: 75%;
 	}
+}
+
+.hidden {
+	display: none;
 }

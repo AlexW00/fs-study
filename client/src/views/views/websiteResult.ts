@@ -8,6 +8,11 @@ import { TaskAnswer } from "../../../../shared/TaskAnswer";
 import { getRandomImage } from "../../img/ImageManager";
 import { likertScaleView } from "./likertScale";
 
+export interface WebsiteResultViewProps {
+	taskId: string;
+	onFinished: (answer: TaskAnswer) => void;
+}
+
 export const websiteResultView = (
 	taskId: string,
 	onAnswer: (answer: TaskAnswer) => void

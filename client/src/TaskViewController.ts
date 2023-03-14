@@ -1,31 +1,51 @@
 import { Duration } from "../../shared/Duration";
-import { TaskAnswer } from "../../shared/TaskAnswer";
-import { loadingBarView } from "./views/views/loadingBar";
-import { websiteResultView } from "./views/views/websiteResult";
+import { awaitDuration } from "./views/views/loadingBar";
+import {
+	websiteResultView,
+	WebsiteResultViewProps,
+} from "./views/views/websiteResult";
 
-const $getContainer = () => document.getElementById("task-container")!;
+const $loadingBarContainer = () =>
+	document.getElementById("loading-bar-container")!;
+const $websiteResultContainer = () =>
+	document.getElementById("website-result-container")!;
+const $preTaskViewContainer = () =>
+	document.getElementById("pre-task-container")!;
 
-const $clearContainer = () => {
-	const container = $getContainer();
-	container.innerHTML = "";
+const $hideContainer = (container: HTMLElement) => {
+	container.classList.add("hidden");
 };
 
-export const showLoadingBar = (duration: Duration, onFinished: () => void) => {
-	const container = $getContainer();
-	loadingBarView(duration, () => {
-		$clearContainer();
-		onFinished();
-	})(container);
+const $showContainer = (container: HTMLElement) => {
+	container.classList.remove("hidden");
 };
 
-export const showWebsiteResultView = (
-	taskId: string,
-	onFinished: (answer: TaskAnswer) => void
+export const showLoadingBar = (
+	duration: Duration,
+	onFinished: () => void,
+	resultViewProps: WebsiteResultViewProps
 ) => {
-	const container = $getContainer();
-	$clearContainer();
-	websiteResultView(taskId, (answer) => {
-		$clearContainer();
-		onFinished(answer);
+	const lodaingBarContainer = $loadingBarContainer(),
+		preTaskViewContainer = $preTaskViewContainer();
+	console.log("show load");
+	$hideContainer(preTaskViewContainer);
+	$showContainer(lodaingBarContainer);
+	awaitDuration(duration, () => {
+		$hideContainer(lodaingBarContainer);
+		onFinished();
+	});
+	setWebsiteResultView(resultViewProps);
+};
+
+const setWebsiteResultView = (props: WebsiteResultViewProps) => {
+	const container = $websiteResultContainer();
+	websiteResultView(props.taskId, (answer) => {
+		$hideContainer(container);
+		props.onFinished(answer);
 	})(container);
+};
+
+export const showWebsiteResultView = () => {
+	const container = $websiteResultContainer();
+	$showContainer(container);
 };

@@ -11,23 +11,29 @@ export const taskView = (
 	task: Task,
 	onTaskComplete: (answer: TaskAnswer) => void
 ) => {
-	const loadStates = reactive({
-		isReady: false,
-		isLoadingBarFinished: false,
-	});
+	const onFinishLoadingBar = () => showWebsiteResultView();
+
+	const onFinishPreTask = () => {
+		showLoadingBar(task.duration, onFinishLoadingBar, {
+			taskId: task.id,
+			onFinished: onTaskComplete,
+		});
+	};
+
 	return html`
 		<div class="task">
-			${() => {
-				if (!loadStates.isReady) {
-					return preTaskView(() => {
-						loadStates.isReady = true;
-						showLoadingBar(task.duration, () =>
-							showWebsiteResultView(task.id, onTaskComplete)
-						);
-					});
-				} else return "";
-			}}
-			<div id="task-container"></div>
+			<div id="pre-task-container">
+				${() => {
+					return preTaskView(onFinishPreTask);
+				}}
+			</div>
+
+			<div id="loading-bar-container" class="hidden">
+				<div class="loading-bar">
+					<div class="loading-bar-progress">LOADING...</div>
+				</div>
+			</div>
+			<div id="website-result-container" class="hidden"></div>
 		</div>
 	`;
 };
