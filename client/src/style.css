@@ -48,6 +48,12 @@ h1 {
 	color: #000814;
 }
 
+h1,
+h2,
+h3 {
+	padding: 2vw 2vw;
+}
+
 p {
 	font-family: "Times New Roman", Times, serif;
 	padding: 0 4vh;
@@ -70,6 +76,7 @@ div {
 button {
 	width: fit-content;
 	height: 4vh;
+	min-height: fit-content;
 	color: #caf0f8;
 	background-color: #003554;
 	border-radius: 4px;
@@ -147,7 +154,7 @@ a:visited {
 
 .loading-bar-progress {
 	visibility: hidden;
-	height: 1vh;
+	height: 0.8vh;
 }
 
 #likert-scale-container {
@@ -167,12 +174,97 @@ a:visited {
 	top: 0;
 }
 
+.search-title {
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-weight: 900;
+	font-size: 280%;
+	padding: 2vw 2vw;
+}
+
 .likert-scale {
 	max-width: fit-content;
 }
 
+button.luck-button {
+	width: fit-content;
+	height: 4vh;
+	min-height: fit-content;
+	color: black;
+	background-color: rgb(240, 240, 240);
+	border-radius: 4px;
+	border-width: 1px;
+	border-color: rgb(180, 180, 180);
+	font-weight: normal;
+	margin: 2vh;
+	box-shadow: none;
+}
+
+button.luck-button:hover {
+	background-color: rgb(240, 240, 240);
+	border-width: 1px;
+	border-color: gray;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.question-bar {
+	line-height: 4vh;
+	font-size: larger;
+	background-color: white;
+	border-color: white;
+	border-radius: 10vw;
+	border-width: 0.2vw;
+	border-style: solid;
+	box-shadow: 0.1vw 0.3vw 0.3vw rgba(150, 150, 150, 0.2),
+		-0.1vw 0vw 0.5vw rgba(150, 150, 150, 0.2);
+	padding: 0.5vw 1.1vw;
+	margin: 1vw 20vw 1vw 20vw;
+	min-height: 4vh;
+	width: 55%;
+	display: block;
+}
+
+.question {
+	font-size: 85%;
+	text-align: left;
+	width: fit-content;
+	justify-self: left;
+	padding-left: 3vw;
+}
+
+.question-bar:hover {
+	box-shadow: 0.1vw 0.3vw 0.3vw rgba(150, 150, 150, 0.5),
+		-0.1vw 0vw 0.5vw rgba(150, 150, 150, 0.5);
+	cursor: not-allowed;
+}
+
+.consent-check{
+	display: flex;
+	flex-direction: row;
+	max-width: 80%;
+}
+
+.consent-check > * {
+	text-align: center;
+	align-self: center;
+	padding-bottom: 0;
+	font-size: 90%;
+}
+
+.consent-check > input {
+	width: 20px;
+	height: 20px;
+}
+
+.hidden{
+	display: none;
+}
+
 @media only screen and (max-device-width: 500px) and (orientation: portrait) {
 	input[type="radio"] {}
+
+	.question-bar {
+		width: 75%;
+	}
 
 	.likert-scale-option>* {
 		font-size: smaller;
@@ -184,5 +276,11 @@ a:visited {
 
 	#likert-scale-container {
 		max-width: 75%;
+	}
+
+	.search-title {
+		font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+		font-weight: 900;
+		font-size: 190%;
 	}
 }
