@@ -1,35 +1,39 @@
 import { html, reactive } from "@arrow-js/core";
-import { Task } from "../../../../shared/Task";
 import { TaskAnswer } from "../../../../shared/TaskAnswer";
-import { loadingBarView } from "./loadingBar";
+import state from "../../classes/State";
+import {
+	showLoadingBar,
+	showWebsiteResultView,
+} from "../../TaskViewController";
 import { preTaskView } from "./preTask";
-import { websiteResultView } from "./websiteResult";
 
 export const taskView = (
-	task: Task,
+	taskIndex: number,
 	onTaskComplete: (answer: TaskAnswer) => void
 ) => {
-	const loadStates = reactive({
-		isReady: false,
-		isLoadingBarFinished: false,
-	});
+	const task = state.run.tasks[taskIndex];
+	console.log("RENDER: taskView i:", taskIndex, "t:", task);
+	const onFinishLoadingBar = () => showWebsiteResultView();
+
 	return html`
 		<div class="task">
-			${() => {
-				if (!loadStates.isReady) {
-					return preTaskView(() => {
-						loadStates.isReady = true;
-					});
-				} else if (!loadStates.isLoadingBarFinished) {
-					return loadingBarView(task.duration, () => {
-						loadStates.isLoadingBarFinished = true;
-					});
-				} else {
-					return websiteResultView(task.id, (answer) => {
-						onTaskComplete(answer);
-					});
-				}
-			}}
+			<div id="pre-task-container">
+				${() => {
+					return preTaskView(() =>
+						showLoadingBar(task.duration, onFinishLoadingBar, {
+							taskId: task.id,
+							onFinished: onTaskComplete,
+						})
+					);
+				}}
+			</div>
+
+			<div id="loading-bar-container" class="hidden">
+				<div class="loading-bar">
+					<div class="loading-bar-progress">LOADING...</div>
+				</div>
+			</div>
+			<div id="website-result-container" class="hidden"></div>
 		</div>
 	`;
 };

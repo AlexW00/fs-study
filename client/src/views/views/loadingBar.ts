@@ -14,3 +14,9 @@ export const loadingBarView = (
 		}}
 	</div>
 `;
+
+export const awaitDuration = (duration: Duration, onFinished: () => void) => {
+	setTimeout(() => {
+		onFinished();
+	}, duration);
+};

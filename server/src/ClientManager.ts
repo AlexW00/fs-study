@@ -50,6 +50,7 @@ export class ClientManager {
 		const platform = auth.platform,
 			run = this.runManager.getRun(auth.runId);
 		if (run) {
+			console.log("run found", auth.runId);
 			if (this.connectionPool.hasConnection(run.id)) {
 				this.connectionPool.addSocket(run.id, socket, platform);
 			} else {
@@ -60,6 +61,7 @@ export class ClientManager {
 			}
 			socket.emit(SocketEvent.ReceiveAuth, { run });
 		} else {
+			console.log("run not found", auth.runId);
 			socket.emit(SocketEvent.ReceiveFailedAuth);
 		}
 	};

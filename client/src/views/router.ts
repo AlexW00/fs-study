@@ -6,6 +6,7 @@ import { $preStudy } from "./routes/preStudy";
 import { $setup } from "./routes/setup";
 import { $study } from "./routes/study";
 import { $unpaired } from "./routes/unpaired";
+import { qrCodeView } from "./views/qrCode";
 
 export const $router = html`
 	<div id="router">
@@ -17,5 +18,6 @@ export const $router = html`
 			else if (route === AppRoute.PostStudy) return $postStudy;
 			else return $study;
 		}}
+		${() => qrCodeView(state.pairingCode, getAppRoute(state))}
 	</div>
 `;
