@@ -1,4 +1,4 @@
-import { html, reactive } from "@arrow-js/core";
+import { html } from "@arrow-js/core";
 import { TaskAnswer } from "../../../../shared/TaskAnswer";
 import state from "../../classes/State";
 import {
