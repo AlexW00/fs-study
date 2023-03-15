@@ -73,7 +73,7 @@ const $pairingCodeCategory = html`
 		value="${() => pairCode.value}"
 		maxlength="5"
 	/>
-	<button @click="${() => onClickPair(true)}">Pair</button>
+	<button @click="${() => onClickPair(true)}">Verbinden</button>
 	${() => {
 		if (doShowError.isInvalidPairCode) {
 			return html`<p>Falscher pair code</p>`;
