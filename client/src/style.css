@@ -303,3 +303,8 @@ button.luck-button:hover {
 	/* center text */
 	text-align: center;
 }
+
+.disabled {
+	pointer-events: none;
+	opacity: 0.4;
+}

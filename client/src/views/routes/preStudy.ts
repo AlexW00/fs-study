@@ -1,10 +1,19 @@
-import { html } from "@arrow-js/core";
+import { html, reactive } from "@arrow-js/core";
 import { SocketEvent } from "../../../../shared/SocketEvent";
 import { setDidGiveConsent } from "../../classes/State";
 import { SocketManager } from "../../Socket";
 
 export const giveConsent = () => {
 	setDidGiveConsent(true);
+};
+
+const didCheckConsent = reactive({
+	value: false,
+});
+
+const onCheckConsent = () => {
+	console.log("check consent", didCheckConsent.value);
+	didCheckConsent.value = !didCheckConsent.value;
 };
 
 const onClickConsent = () => {
@@ -103,12 +112,14 @@ Wimmer.
         <a href="mailto:raphael.wimmer@informatik.uni-regensburg.de">raphael.wimmer@informatik.uni-regensburg.de</a>
         <br>
     </p>
-	<div class="consent-check">
-	<input type="checkbox" name="Einverständniserklärung" />
+	<div class="consent-check" >
+	<input type="checkbox" name="Einverständniserklärung" @input="${onCheckConsent} value="${
+	didCheckConsent.value
+}"/>
     <label for="0">Ich habe die Einverständniserklärung zur Aufklärung über die Teilnahme sorgfältig durchgelesen und
         stimme dieser zu.</label>
-		
 		</div>
-		<button @click="${onClickConsent}">Bestätigen</button>
+		<button @click="${onClickConsent}" class="${() =>
+	didCheckConsent.value ? "active" : "disabled"}">Einverstanden</button>
 	</div>
 `;
