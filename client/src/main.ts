@@ -16,6 +16,9 @@ async function main() {
 	await SocketManager.init();
 	console.log("socket init");
 
+	const $loadingStart = document.getElementById("loading-start")!;
+	$loadingStart.style.display = "none";
+
 	const socketManager = SocketManager.getInstance();
 
 	const pairingCode = getPairingCodeFromUrl();

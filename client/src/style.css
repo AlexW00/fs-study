@@ -308,3 +308,10 @@ button.luck-button:hover {
 	pointer-events: none;
 	opacity: 0.4;
 }
+
+#loading-start {
+	display: absolute;
+	top: 50%;
+	left: 50%;
+	text-align: center;
+}
