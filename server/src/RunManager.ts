@@ -26,7 +26,7 @@ export class RunManager {
 	public newRun(): Run {
 		const index = this.getTotalNumberOfRuns(),
 			id = this.generateNextRunId(),
-			tasks = getLatinSquaredTasks(index),
+			tasks = getLatinSquaredTasks(index, id),
 			run = {
 				id,
 				tasks,
