@@ -12,6 +12,7 @@ const doShowCheckConsentError = reactive({
 });
 
 const onCheckConsent = () => {
+	console.log("onCheckConsent");
 	didCheckConsent.value = !didCheckConsent.value;
 	if (didCheckConsent.value) {
 		doShowCheckConsentError.value = false;
@@ -19,6 +20,7 @@ const onCheckConsent = () => {
 };
 
 const onClickConsent = () => {
+	console.log("onClickConsent");
 	if (!didCheckConsent.value) {
 		doShowCheckConsentError.value = true;
 	} else {
@@ -136,6 +138,5 @@ Wimmer.
     </div>
         ${() => (doShowCheckConsentError.value ? $checkConsentError : "")}
         <button @click="${onClickConsent}">Weiter</button>
-        
 	</div>
 `;
