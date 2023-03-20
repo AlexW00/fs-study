@@ -2,6 +2,7 @@ import "./style.css";
 import { SocketEvent } from "../../shared/SocketEvent";
 import state, {
 	initialState,
+	setDidGiveConsent,
 	setDidReadInstructions,
 	setPairingCode,
 } from "./classes/State";
@@ -10,7 +11,6 @@ import { getPairingCodeFromUrl, getPlatform } from "./util";
 import { $router } from "./views/router";
 import { importImages, loadImages } from "./img/ImageManager";
 import { SocketManager } from "./Socket";
-import { giveConsent } from "./views/routes/preStudy";
 import StorageManager from "./StorageManager";
 
 async function main() {
@@ -68,7 +68,10 @@ async function main() {
 		state.isPaired = false;
 	});
 
-	SocketManager.getInstance().on(SocketEvent.ReceiveGiveConsent, giveConsent);
+	SocketManager.getInstance().on(SocketEvent.ReceiveGiveConsent, () => {
+		console.log("received give consent");
+		setDidGiveConsent(true);
+	});
 
 	SocketManager.getInstance().on(SocketEvent.ReceiveFailedAuth, () => {
 		console.log("failed auth");

@@ -3,10 +3,6 @@ import { SocketEvent } from "../../../../shared/SocketEvent";
 import { setDidGiveConsent } from "../../classes/State";
 import { SocketManager } from "../../Socket";
 
-export const giveConsent = () => {
-	setDidGiveConsent(true);
-};
-
 const didCheckConsent = reactive({
 	value: false,
 });
@@ -16,7 +12,7 @@ const onCheckConsent = () => {
 };
 
 const onClickConsent = () => {
-	giveConsent();
+	setDidGiveConsent(true);
 	SocketManager.getInstance().emit(SocketEvent.SendGiveConsent, undefined);
 };
 
