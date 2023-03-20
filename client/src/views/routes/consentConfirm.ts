@@ -8,7 +8,7 @@ const onConsent = () => {
     SocketManager.getInstance().emit(SocketEvent.SendGiveConsent, undefined);
 }
 
-export const $instructions = html`
+export const $consentConfirm = html`
 	<div>
 		<h1>Erklärungddd der Studie</h1>
 		
