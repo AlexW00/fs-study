@@ -330,3 +330,8 @@ button.luck-button:hover {
 #leave-session-container {
 	margin-top: 2em;
 }
+
+#check-consent-error {
+	color: red;
+	margin-top: 2em;
+}
