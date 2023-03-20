@@ -56,15 +56,15 @@ const togglePairingCodeCategory = () => {
 const $noPairingCodeCategory = html`
 	<button @click="${() => onClickPair(false)}">Start</button>
 	<div>
-		Wenn du bereits einen Pairing Code hast, gib ihn hier ein:
+		Wenn Sie bereits einen Pairing Code haben, geben Sie ihn hier ein:
 		<a href="#" @click="${() => togglePairingCodeCategory()}">
-			gib einen pairing code ein
+			Pairing code eingeben
 		</a>
 	</div>
 `;
 
 const $pairingCodeCategory = html`
-	<label for="pairCode">Dein Pairing Code zum Verbinden:</label>
+	<label for="pairCode">Ihr Pairing Code zum Verbinden:</label>
 	<input
 		type="text"
 		id="pairCode"
@@ -76,15 +76,15 @@ const $pairingCodeCategory = html`
 	<button @click="${() => onClickPair(true)}">Verbinden</button>
 	${() => {
 		if (doShowError.isInvalidPairCode) {
-			return html`<p>Falscher pair code</p>`;
+			return html`<p>Ungültiger pair code</p>`;
 		} else if (doShowError.isInvalidAuth) {
-			return html`<p>Session existiert nicht!</p>`;
+			return html`<p>Pairing code existiert nicht!</p>`;
 		} else {
 			return html``;
 		}
 	}}
 	<div>
-		Hast du noch keinen Pairing Code? Dann erstelle hier einen:
+		Sie Haben noch keinen Pairing Code? Dann erstellen Sie hier einen:
 		<a href="#" @click="${() => togglePairingCodeCategory()}">
 			Pairing Code erstellen
 		</a>
@@ -93,7 +93,7 @@ const $pairingCodeCategory = html`
 
 export const $setup = html`
 	<div>
-		<h1>Verbinde deine Geräte:</h1>
+		<h1>Verbinden Sie Ihre Geräte:</h1>
 		${() => {
 			if (hasPairingCode.value) {
 				return $pairingCodeCategory;

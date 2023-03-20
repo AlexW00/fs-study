@@ -30,12 +30,12 @@ body {
 	align-items: center;
 }
 
-.likert-scale-option>* {
+.likert-scale-option > * {
 	align-self: center;
 	justify-self: center;
 }
 
-.likert-scale-option>label {
+.likert-scale-option > label {
 	text-align: center;
 	max-height: 1em;
 	min-height: 1em;
@@ -147,12 +147,14 @@ a:visited {
 	animation-name: movementLoader;
 	animation-timing-function: linear;
 	background: rgb(2, 62, 138);
-	background: linear-gradient(90deg,
-			rgba(2, 62, 138, 1) 0vw,
-			rgba(2, 62, 138, 1) 35vw,
-			rgba(144, 224, 239, 1) 50vw,
-			rgba(2, 62, 138, 1) 65vw,
-			rgba(2, 62, 138, 1) 100vw);
+	background: linear-gradient(
+		90deg,
+		rgba(2, 62, 138, 1) 0vw,
+		rgba(2, 62, 138, 1) 35vw,
+		rgba(144, 224, 239, 1) 50vw,
+		rgba(2, 62, 138, 1) 65vw,
+		rgba(2, 62, 138, 1) 100vw
+	);
 }
 
 .loading-bar-progress {
@@ -247,14 +249,14 @@ button.luck-button:hover {
 	max-width: 80%;
 }
 
-.consent-check>* {
+.consent-check > * {
 	text-align: center;
 	align-self: center;
 	padding-bottom: 0;
 	font-size: 90%;
 }
 
-.consent-check>input {
+.consent-check > input {
 	width: 20px;
 	height: 20px;
 }
@@ -269,13 +271,14 @@ button.luck-button:hover {
 }
 
 @media only screen and (max-device-width: 500px) and (orientation: portrait) {
-	input[type="radio"] {}
+	input[type="radio"] {
+	}
 
 	.question-bar {
 		width: 75%;
 	}
 
-	.likert-scale-option>* {
+	.likert-scale-option > * {
 		font-size: smaller;
 	}
 
@@ -307,7 +310,7 @@ button.luck-button:hover {
 .end-text {
 	/* center text */
 	text-align: center;
-
+}
 .disabled {
 	pointer-events: none;
 	opacity: 0.4;
@@ -318,4 +321,12 @@ button.luck-button:hover {
 	top: 50%;
 	left: 50%;
 	text-align: center;
+}
+
+#leave-session {
+	padding: 0;
+}
+
+#leave-session-container {
+	margin-top: 4em;
 }
