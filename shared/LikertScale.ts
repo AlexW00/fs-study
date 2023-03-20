@@ -23,15 +23,15 @@ export const ESTIMATED_DURATION_LIKERT_SCALE: LikertScale = {
 	options: [
 		{
 			value: 1,
-			label: "sofort",
-		},
-		{
-			value: 2,
 			label: "sehr kurz",
 		},
 		{
+			value: 2,
+			label: "",
+		},
+		{
 			value: 3,
-			label: "kurz",
+			label: "",
 		},
 		{
 			value: 4,
@@ -39,15 +39,15 @@ export const ESTIMATED_DURATION_LIKERT_SCALE: LikertScale = {
 		},
 		{
 			value: 5,
-			label: "lang",
+			label: "",
 		},
 		{
 			value: 6,
-			label: "sehr lang",
+			label: "",
 		},
 		{
 			value: 7,
-			label: "unendlich lang",
+			label: "sehr lang",
 		},
 	],
 };
