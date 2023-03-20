@@ -160,6 +160,8 @@ export const $studyExplanation = html`
 export const $preStudy = html`
 	${() => {
 		if (!state.didGiveConsent) {
+			console.log("preStudy didGiveConsent: " + state.didGiveConsent);
+			console.log("preStudy didCompleteConsent: " + didCompleteConsent.value);
 			if (!didCompleteConsent.value) return $consent;
 			else return $studyExplanation;
 		} else {
