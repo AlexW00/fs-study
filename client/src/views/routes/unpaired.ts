@@ -14,8 +14,12 @@ export const $unpaired = html`
 		<h1>Nicht Verbunden</h1>
 		${() => qrCodeView(state.pairingCode, getAppRoute(state))}
 		<p class="end-text">
-			Ihr Pairing code ist: <b>${() => state.pairingCode}</b> <br />
-			Geben Sie ihn auf Ihren anderen Gerät ein oder scannen Sie den QR-Code.
+			Ihr Pairing code ist: <b>${() => state.pairingCode}</b>
+		</p>
+		<p class="end-text">
+			Geben Sie ihn auf Ihren anderen Gerät ein oder scannen Sie den QR-Code.<br />
+			Achten Sie darauf, dass <b>beide</b> Geräte während der Studie an sind
+			(nicht in Standby).
 		</p>
 		<p id="leave-session-container">
 			Um zurück zur Startseite zu gelangen, können Sie auch die
