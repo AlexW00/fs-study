@@ -12,6 +12,7 @@ export class StorageManager {
 	}
 
 	public setDidGiveConsent(didGiveConsent: boolean): void {
+		console.trace("setDidGiveConsent", didGiveConsent);
 		localStorage.setItem("didGiveConsent", didGiveConsent.toString());
 	}
 
