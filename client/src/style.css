@@ -307,4 +307,15 @@ button.luck-button:hover {
 .end-text {
 	/* center text */
 	text-align: center;
+
+.disabled {
+	pointer-events: none;
+	opacity: 0.4;
+}
+
+#loading-start {
+	display: absolute;
+	top: 50%;
+	left: 50%;
+	text-align: center;
 }

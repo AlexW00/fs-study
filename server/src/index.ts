@@ -13,12 +13,13 @@ console.log("Starting server...");
 const app = express();
 const server = http.createServer(app);
 const runManager = new RunManager();
+const PORT = process.env.PORT || 3000;
 runManager.init().then(() => {
 	const clientManager = new ClientManager(server, runManager);
 	const DIST_DIR = path.join(__dirname, "../../../../dist");
 	app.use(express.static(DIST_DIR));
 
-	server.listen(3000, () => {
-		console.log("listening on *:3000");
+	server.listen(PORT, () => {
+		console.log("listening on *:" + PORT);
 	});
 });
