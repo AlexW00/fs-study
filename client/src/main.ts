@@ -1,6 +1,10 @@
 import "./style.css";
 import { SocketEvent } from "../../shared/SocketEvent";
-import state, { initialState, setPairingCode } from "./classes/State";
+import state, {
+	initialState,
+	setDidReadInstructions,
+	setPairingCode,
+} from "./classes/State";
 import { CurrentTaskInfo } from "../../shared/CurrentTaskInfo";
 import { getPairingCodeFromUrl, getPlatform } from "./util";
 import { $router } from "./views/router";
@@ -74,6 +78,10 @@ async function main() {
 	SocketManager.getInstance().on(SocketEvent.DeletedSession, () => {
 		StorageManager.reset();
 		Object.assign(state, initialState());
+	});
+
+	SocketManager.getInstance().on(SocketEvent.ReceiveReadInstructions, () => {
+		setDidReadInstructions(true);
 	});
 
 	const app = document.getElementById("app")!;

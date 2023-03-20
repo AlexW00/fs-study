@@ -5,6 +5,7 @@ export enum AppRoute {
 	Setup = "setup",
 	Unpaired = "unpaired",
 	PreStudy = "pre-study",
+	Instructions = "instructions",
 	Study = "study",
 	PostStudy = "post-study",
 }
@@ -25,6 +26,8 @@ export const getAppRoute = (state: State): AppRoute => {
 	else if (state.pairingCode !== "" && !state.isPaired)
 		return AppRoute.Unpaired;
 	else if (!state.didGiveConsent && state.isPaired) return AppRoute.PreStudy;
+	else if (!state.didReadInstructions && state.isPaired)
+		return AppRoute.Instructions;
 	else if (state.run.current.taskProgress === TaskProgress.finished)
 		return AppRoute.PostStudy;
 	else return AppRoute.Study;

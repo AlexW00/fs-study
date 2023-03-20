@@ -15,4 +15,6 @@ export enum SocketEvent {
 	Unpaired = "unpaired",
 	Paired = "paired",
 	Test = "test",
+	ReceiveReadInstructions = "receiveReadInstructions",
+	SendReadInstructions = "readInstructions",
 }

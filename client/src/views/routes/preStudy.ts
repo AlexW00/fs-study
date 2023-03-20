@@ -1,6 +1,6 @@
 import { html, reactive } from "@arrow-js/core";
 import { SocketEvent } from "../../../../shared/SocketEvent";
-import state, { setDidGiveConsent } from "../../classes/State";
+import { setDidGiveConsent } from "../../classes/State";
 import { SocketManager } from "../../Socket";
 
 export const giveConsent = () => {
@@ -11,25 +11,16 @@ const didCheckConsent = reactive({
 	value: false,
 });
 
-const didCompleteConsent = reactive({
-	value: false,
-});
-
-const onClickStartStudy = () => {
-	giveConsent();
-	SocketManager.getInstance().emit(SocketEvent.SendGiveConsent, undefined);
-};
-
 const onCheckConsent = () => {
-	console.log("check consent", didCheckConsent.value);
 	didCheckConsent.value = !didCheckConsent.value;
 };
 
 const onClickConsent = () => {
-	didCompleteConsent.value = true;
+	giveConsent();
+	SocketManager.getInstance().emit(SocketEvent.SendGiveConsent, undefined);
 };
 
-export const $consent = html`
+export const $preStudy = html`
 	<div>
 		<h1 class="hidden">Pre Study</h1>
 		<h1>
@@ -131,41 +122,4 @@ Wimmer.
 		<button @click="${onClickConsent}" class="${() =>
 	didCheckConsent.value ? "active" : "disabled"}">Einverstanden</button>
 	</div>
-`;
-
-export const $studyExplanation = html`
-	<div>
-		<h1>Erklärung der Studie</h1>
-		<p class="end-text">
-			Diese Studie beschäftigt sich mit Wartezeiten beim Laden von Webseiten.
-		</p>
-		<p class="end-text">
-			Stellen Sie bitte sicher, dass sie an einem ruhigen Ort und wenig
-			abgelenkt sind.
-		</p>
-		<p class="end-text">
-			Im Folgenden werden Sie eine Seite angezeigt bekommen, mit der Sie auf gut
-			Glück Suchanfragen stellen können. Drücken Sie auf den "Auf gut Glück
-			Button" und warten Sie, bis die Webseite geladen hat. Geben Sie bitte
-			daraufhin an, wie lange Ihnen die Wartezeit vorgekommen ist.
-		</p>
-		<p class="end-text">
-			Folgen Sie dabei den Anweisungen zum Wechseln zwischen Handy und
-			Desktop/Laptop.
-		</p>
-		<button @click="${onClickStartStudy}">Verstanden</button>
-	</div>
-`;
-
-export const $preStudy = html`
-	${() => {
-		if (!state.didGiveConsent) {
-			console.log("preStudy didGiveConsent: " + state.didGiveConsent);
-			console.log("preStudy didCompleteConsent: " + didCompleteConsent.value);
-			if (!didCompleteConsent.value) return $consent;
-			else return $studyExplanation;
-		} else {
-			return "";
-		}
-	}}
 `;

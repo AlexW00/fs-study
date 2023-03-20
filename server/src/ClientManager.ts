@@ -25,6 +25,11 @@ export class ClientManager {
 			this.listen(socket, SocketEvent.PostAnswer, this.onPostAnswer);
 			this.listen(socket, SocketEvent.DeleteSession, this.onDeleteSession);
 			this.listen(socket, SocketEvent.SendGiveConsent, this.onGiveConsent);
+			this.listen(
+				socket,
+				SocketEvent.SendReadInstructions,
+				this.onReadInstructions
+			);
 		});
 	}
 
@@ -120,6 +125,19 @@ export class ClientManager {
 				if (senderPlatform === Platform.mobile)
 					connection.desktop?.emit(SocketEvent.ReceiveGiveConsent);
 				else connection.mobile?.emit(SocketEvent.ReceiveGiveConsent);
+			}
+		}
+	};
+
+	private onReadInstructions = (socket: Socket) => {
+		const runId = this.connectionPool.getRunId(socket.id);
+		if (runId) {
+			const connection = this.connectionPool.getConnection(runId),
+				senderPlatform = this.connectionPool.getPlatform(socket.id, runId);
+			if (connection) {
+				if (senderPlatform === Platform.mobile)
+					connection.desktop?.emit(SocketEvent.ReceiveReadInstructions);
+				else connection.mobile?.emit(SocketEvent.ReceiveReadInstructions);
 			}
 		}
 	};

@@ -15,6 +15,14 @@ export class StorageManager {
 		localStorage.setItem("didGiveConsent", didGiveConsent.toString());
 	}
 
+	public getDidReadInstructions(): boolean {
+		return localStorage.getItem("didReadInstructions") === "true";
+	}
+
+	public setDidReadInstructions(didReadInstructions: boolean): void {
+		localStorage.setItem("didReadInstructions", didReadInstructions.toString());
+	}
+
 	public reset(): void {
 		localStorage.clear();
 	}
