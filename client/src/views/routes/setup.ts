@@ -56,7 +56,7 @@ const togglePairingCodeCategory = () => {
 const $noPairingCodeCategory = html`
 	<button @click="${() => onClickPair(false)}">Start</button>
 	<div>
-		Or
+		Wenn du bereits einen Pairing Code hast, gib ihn hier ein:
 		<a href="#" @click="${() => togglePairingCodeCategory()}">
 			gib einen pairing code ein
 		</a>
@@ -64,7 +64,7 @@ const $noPairingCodeCategory = html`
 `;
 
 const $pairingCodeCategory = html`
-	<label for="pairCode">Pairing Code:</label>
+	<label for="pairCode">Dein Pairing Code zum Verbinden:</label>
 	<input
 		type="text"
 		id="pairCode"
@@ -84,16 +84,16 @@ const $pairingCodeCategory = html`
 		}
 	}}
 	<div>
-		Or
+		Hast du noch keinen Pairing Code? Dann erstelle hier einen:
 		<a href="#" @click="${() => togglePairingCodeCategory()}">
-			starten Sie ohne einen pairing code
+			Pairing Code erstellen
 		</a>
 	</div>
 `;
 
 export const $setup = html`
 	<div>
-		<h1>Setup</h1>
+		<h1>Verbinde deine Geräte:</h1>
 		${() => {
 			if (hasPairingCode.value) {
 				return $pairingCodeCategory;
