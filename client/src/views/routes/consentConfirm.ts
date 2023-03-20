@@ -34,12 +34,12 @@ const onClickConsent = () => {
 	}
 };
 
-const $checkConsentError = html`
-	<div id="check-consent-error">
-		Bitte bestätigen Sie, dass Sie die Einverständniserklärung zur Aufklärung
-		über die Teilnahme gelesen habe^n.
-	</div>
-`;
+// const $checkConsentError = html`
+// 	<div id="check-consent-error">
+// 		Bitte bestätigen Sie, dass Sie die Einverständniserklärung zur Aufklärung
+// 		über die Teilnahme gelesen habe^n.
+// 	</div>
+// `;
 
 export const $consentConfirm = html`
     <div class="consent-check" >
