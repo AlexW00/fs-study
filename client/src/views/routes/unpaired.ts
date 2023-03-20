@@ -10,7 +10,8 @@ const onLeaveSession = () => {
 export const $unpaired = html`
 	<div>
 		<h1>Nicht Verbunden</h1>
-		<p>Pairing code: ${() => state.pairingCode}</p>
-		<a href="#" @click="${onLeaveSession}">Verlasse Session</a>
+		<p>Dein Pairing code ist: <b>${() => state.pairingCode}</b> <br> Gib ihn auf deinem anderen Gerät ein oder</p>
+		<a href="#" @click="${onLeaveSession}">Verlasse die Session</a>
+		<p>Zum Verbinden kannst du auch diesen QR-Code benutzen:</p>
 	</div>
 `;

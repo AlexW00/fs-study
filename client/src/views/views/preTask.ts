@@ -8,5 +8,6 @@ export const preTaskView = (onReady: () => void) => html`
 			<div class="question">Zufälliger Wikieintrag...</div>
 		</div>		
 		<button class="luck-button" @click="${() => onReady()}">Auf gut Glück!</button>
+		<p class="hint">Um die Suche zu starten klicke auf "Auf gut Glück!"</p>
 	</div>
 `;
