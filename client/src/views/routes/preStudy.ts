@@ -39,13 +39,15 @@ const $checkConsentError = html`
 `;
 
 export const $preStudy = html`
+<div>
+	${$consent}
     <div class="consent-check" >
-    <input type="checkbox" name="Einverständniserklärung" @input="${onCheckConsent} value="${didCheckConsent.value}"/>
-    <label for="0">Ich habe die Einverständniserklärung zur Aufklärung über die Teilnahme sorgfältig durchgelesen und
-        stimme dieser zu.</label>
+		<input type="checkbox" name="Einverständniserklärung" @input="${onCheckConsent} value="${didCheckConsent.value}"/>
+		<label for="0">Ich habe die Einverständniserklärung zur Aufklärung über die Teilnahme sorgfältig durchgelesen und stimme dieser zu.</label>
     </div>
     </div>
         ${() => (doShowCheckConsentError.value ? $checkConsentError : "")}
         <button @click="${onClickConsent}">Weiter</button>
 	</div>
+</div>
 `;
