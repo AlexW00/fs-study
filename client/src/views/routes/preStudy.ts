@@ -11,16 +11,25 @@ const didCheckConsent = reactive({
 	value: false,
 });
 
+const didCompleteConsent = reactive({
+	value: false,
+});
+
+const onClickStartStudy = () => {
+	giveConsent();
+	SocketManager.getInstance().emit(SocketEvent.SendGiveConsent, undefined);
+};
+
 const onCheckConsent = () => {
 	console.log("check consent", didCheckConsent.value);
 	didCheckConsent.value = !didCheckConsent.value;
 };
 
 const onClickConsent = () => {
-	giveConsent();
-	SocketManager.getInstance().emit(SocketEvent.SendGiveConsent, undefined);
+	didCompleteConsent.value = true;
 };
-export const $preStudy = html`
+
+export const $consent = html`
 	<div>
 		<h1 class="hidden">Pre Study</h1>
 		<h1>
@@ -122,4 +131,19 @@ Wimmer.
 		<button @click="${onClickConsent}" class="${() =>
 	didCheckConsent.value ? "active" : "disabled"}">Einverstanden</button>
 	</div>
+`;
+
+export const $studyExplanation = html`
+	<div class="study-explanation">
+		<h1>Erklärung der Studie</h1>
+		<p class="end-text">Im folgenden....</p>
+		<button @click="${onClickStartStudy}">Studie starten</button>
+	</div>
+`;
+
+export const $preStudy = html`
+	${() => {
+		if (!didCompleteConsent.value) return $consent;
+		else return $studyExplanation;
+	}}
 `;
