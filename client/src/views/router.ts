@@ -11,6 +11,7 @@ export const $router = html`
 	<div id="router">
 		${() => {
 			const route = getAppRoute(state);
+			console.log("route", route);
 			if (route === AppRoute.Setup) return $setup;
 			else if (route === AppRoute.Unpaired) return $unpaired;
 			else if (route === AppRoute.PreStudy) return $preStudy;
