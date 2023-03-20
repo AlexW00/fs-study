@@ -2,6 +2,7 @@ import { Run } from "../../shared/Run";
 import path from "path";
 import fs from "fs";
 import axios from "axios";
+import FormData from "form-data";
 
 const RUNS_DIR = path.join(__dirname, "../../../../runs");
 const IN_PROGRESS_RUNS_DIR = path.join(RUNS_DIR, "in-progress");
@@ -106,20 +107,24 @@ export class StorageManager {
 
 		const runPath = this.getRunFilepath(runId, true),
 			runFile = fs.readFileSync(runPath),
-			fileBlob = new Blob([runFile], { type: "application/json" }),
+			fileBuffer = Buffer.from(runFile),
 			payload_json = { content: "Run completed: " + runId },
 			formData = new FormData();
 
 		formData.append("payload_json", JSON.stringify(payload_json));
-		formData.append("file", fileBlob, "run.json");
+		formData.append("file", fileBuffer, "run.json");
 
 		// send json as a file to discord via webhook
 		axios
 			.post(WEBHOOK_URL, formData, {
-				headers: { "Content-Type": "multipart/form-data" },
+				headers: formData.getHeaders(),
 			})
 			.then((response) => {
-				console.log(response);
+				if (response.status !== 200) {
+					console.error("DID NOT POST", response);
+				} else {
+					console.log("POSTED TO DISCORD");
+				}
 			})
 			.catch((error) => {
 				console.error(error.response);

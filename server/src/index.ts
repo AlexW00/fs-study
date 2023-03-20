@@ -5,6 +5,7 @@ import { ClientManager } from "./ClientManager";
 import { RunManager } from "./RunManager";
 // load dotenv
 import dotenv from "dotenv";
+import { storageManager } from "./StorageManager";
 
 dotenv.config();
 
@@ -18,6 +19,8 @@ runManager.init().then(() => {
 	const clientManager = new ClientManager(server, runManager);
 	const DIST_DIR = path.join(__dirname, "../../../../dist");
 	app.use(express.static(DIST_DIR));
+
+	// storageManager.postRunToDiscord("00000");
 
 	server.listen(PORT, () => {
 		console.log("listening on *:" + PORT);
