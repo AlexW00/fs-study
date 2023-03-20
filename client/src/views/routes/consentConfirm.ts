@@ -17,12 +17,12 @@ const onConsent = () => {
 }
 
 
-// const onCheckConsent = () => {
-// 	didCheckConsent.value = !didCheckConsent.value;
-// 	if (didCheckConsent.value) {
-// 		doShowCheckConsentError.value = false;
-// 	}
-// };
+const onCheckConsent = () => {
+	didCheckConsent.value = !didCheckConsent.value;
+	if (didCheckConsent.value) {
+		doShowCheckConsentError.value = false;
+	}
+};
 
 const onClickConsent = () => {
 	console.log("onClickConsent");
@@ -42,6 +42,9 @@ const onClickConsent = () => {
 // `;
 
 export const $consentConfirm = html`
-
+    <div class="consent-check" >
+        <input id="consent-checkbox" type="checkbox" name="Einverständniserklärung" @input="${onCheckConsent}/>
+        <label for="consent-checkbox">Ich habe die Einverständniserklärung zur Aufklärung über die Teilnahme sorgfältig durchgelesen und stimme dieser zu.</label>
+    </div>
     <button @click="${onClickConsent}">Verstanden</button>
 `;
