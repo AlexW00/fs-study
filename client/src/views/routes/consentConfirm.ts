@@ -1,4 +1,4 @@
-import { html, reactive } from "@arrow-js/core";
+import { html } from "@arrow-js/core";
 import { SocketEvent } from "../../../../shared/SocketEvent";
 import { setDidGiveConsent } from "../../classes/State";
 import { SocketManager } from "../../Socket";
