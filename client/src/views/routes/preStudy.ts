@@ -12,6 +12,7 @@ const onCheckConsent = () => {
 };
 
 const onClickConsent = () => {
+	console.log("onClickConsent");
 	setDidGiveConsent(true);
 	SocketManager.getInstance().emit(SocketEvent.SendGiveConsent, undefined);
 };
@@ -115,7 +116,7 @@ Wimmer.
     <label for="0">Ich habe die Einverständniserklärung zur Aufklärung über die Teilnahme sorgfältig durchgelesen und
         stimme dieser zu.</label>
 		</div>
-		<button @click="${onClickConsent}" class="${() =>
+		<button @click="${() => onClickConsent()}" class="${() =>
 	didCheckConsent.value ? "active" : "disabled"}">Einverstanden</button>
 	</div>
 `;

@@ -117,6 +117,7 @@ export class ClientManager {
 	};
 
 	private onGiveConsent = (socket: Socket) => {
+		console.log("give consent");
 		const runId = this.connectionPool.getRunId(socket.id);
 		if (runId) {
 			const connection = this.connectionPool.getConnection(runId),
