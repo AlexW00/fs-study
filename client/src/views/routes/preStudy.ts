@@ -159,8 +159,11 @@ export const $studyExplanation = html`
 
 export const $preStudy = html`
 	${() => {
-		if (!didCompleteConsent.value) return $consent;
-		else if (!state.didGiveConsent) return $studyExplanation;
-		else return "";
+		if (!state.didGiveConsent) {
+			if (!didCompleteConsent.value) return $consent;
+			else return $studyExplanation;
+		} else {
+			return "";
+		}
 	}}
 `;
