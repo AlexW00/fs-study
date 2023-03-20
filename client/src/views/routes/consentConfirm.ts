@@ -46,8 +46,8 @@ export const $consentConfirm = html`
         <input id="consent-checkbox" type="checkbox" name="Einverständniserklärung" @input="${onCheckConsent} value="${didCheckConsent.value}"/>
         <label for="consent-checkbox">Ich habe die Einverständniserklärung zur Aufklärung über die Teilnahme sorgfältig durchgelesen und stimme dieser zu.</label>
     </div>
-    </div>
+    <div>
         ${() => (doShowCheckConsentError.value ? $checkConsentError : "")}
         <button @click="${onClickConsent}">Verstanden</button>
-    /div>
+    </div>
 `;
