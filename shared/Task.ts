@@ -86,7 +86,7 @@ const getLS3 = (id: string): boolean => {
 		s = s.substring(1);
 	}
 	s = (s.length == 0) ? "0" : s;
-	var n = parseInt(s, 36);
+	var n = parseInt(s);
 	return (n % 2 == 0);
 };
 
