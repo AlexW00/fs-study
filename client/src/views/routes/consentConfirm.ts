@@ -10,5 +10,5 @@ const onConsent = () => {
 }
 
 export const $consentConfirm = html`
-    <button @click="${onConsent}">Aktzeptieren</button>
+    <button @click="${onConsent}">Akzeptieren</button>
 `;
