@@ -21,7 +21,7 @@ const onInputPairCode = (e: any) => {
 };
 
 const isValidPairCode = (code: string) => {
-	return code.length === 5;
+	return code.length === 3;
 };
 
 const createNewSession = () => {
@@ -68,7 +68,7 @@ const $pairingCodeCategory = html`
 	<input
 		type="text"
 		id="pairCode"
-		placeholder="12345"
+		placeholder="123"
 		@input="${(e: any) => onInputPairCode(e)}"
 		value="${() => pairCode.value}"
 		maxlength="5"

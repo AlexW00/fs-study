@@ -73,7 +73,8 @@ export class RunManager {
 
 	private generateNextRunId(): string {
 		const totalNumberOfRuns = this.getTotalNumberOfRuns();
-		const nextRunId = totalNumberOfRuns.toString(36);
-		return nextRunId.padStart(5, "0");
+		// 3 digit number with leading zeros
+		return totalNumberOfRuns.toString().padStart(3, "0");	
+		
 	}
 }
