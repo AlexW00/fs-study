@@ -305,12 +305,14 @@ button.luck-button:hover {
 	padding-right: 0.4rem;
 	background-color: #bebebe;
 	border-radius: 6px;
+	font-family: 'Courier New', Courier, monospace;
 }
 
 .end-text {
 	/* center text */
 	text-align: center;
 }
+
 .disabled {
 	pointer-events: none;
 	opacity: 0.4;
