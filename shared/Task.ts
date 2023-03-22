@@ -93,22 +93,25 @@ const getLS3 = (id: string): boolean => {
 export function getLatinSquaredTasks(index: number, id:string): Task[] {
 	// TODO: Latin square here
 
+	
 	const id_int = parseInt(id);
+	const isLs1 = id_int % 2 == 0;
+
 	const overshootStartIndex = id_int % (LATIN_SQUARE_TASK_IDs.length * 2);
 
 	const TASKS: Task[] = [];
-	var currentIDs = LATIN_SQUARE_TASK_IDs;
+	var currentIDs = isLs1 ? LATIN_SQUARE_TASK_IDs : LATIN_SQUARE_TASK_IDs2;
 
-	if (overshootStartIndex >= LATIN_SQUARE_TASK_IDs.length) {
-		currentIDs = LATIN_SQUARE_TASK_IDs2;
-	}
 	
 	console.log(id, "id ------------------------------------------------------------------------------------");
 	console.log(currentIDs);
 	console.log("is desktop");
 	console.log(getLS3(id));
 
-	const startingRow = id_int % currentIDs.length,
+
+	const idNorm = (isLs1 ? id_int : id_int - 1) / 2;
+
+	const startingRow = idNorm % currentIDs.length,
 	firstSplit = currentIDs.slice(startingRow),
 	secondSplit = currentIDs.slice(0, startingRow);
 
