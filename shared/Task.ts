@@ -70,11 +70,6 @@ const LATIN_SQUARE_TASK_IDs2 = [
 	[0, 1, 2, 5, 3, 4]
 ];
 
-const getRow = (index: number): number => {
-
-	return index % LATIN_SQUARE_TASK_IDs.length; //here ok, both LS have same length
-};
-
 export function getTaskById(id: string): Task | undefined {
 	return TASKS.find((task) => task.id === id);
 }
@@ -93,11 +88,11 @@ const getLS3 = (id: string): boolean => {
 export function getLatinSquaredTasks(index: number, id:string): Task[] {
 	// TODO: Latin square here
 
+	console.log(index);
 	
 	const id_int = parseInt(id);
 	const isLs1 = id_int % 2 == 0;
 
-	const overshootStartIndex = id_int % (LATIN_SQUARE_TASK_IDs.length * 2);
 
 	const TASKS: Task[] = [];
 	var currentIDs = isLs1 ? LATIN_SQUARE_TASK_IDs : LATIN_SQUARE_TASK_IDs2;
